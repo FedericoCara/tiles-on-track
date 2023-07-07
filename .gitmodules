@@ -1,0 +1,3 @@
+[submodule "Assets/Libraries/mimic-framework"]
+	path = Assets/Libraries/mimic-framework
+	url = git@bitbucket.org:mimicgames/mimic-framework.git
