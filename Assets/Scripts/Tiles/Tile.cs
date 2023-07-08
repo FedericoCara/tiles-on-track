@@ -14,7 +14,7 @@ public class Tile : MonoBehaviour {
     public Tile FollowingTile => followingTile;
     public TileDirection NextTileDirection => nextTileDirection;
     
-    private void Awake() {
+    private void Start() {
         InitializePoints();
     }
 
@@ -23,6 +23,13 @@ public class Tile : MonoBehaviour {
         if (currentIndex + 1 >= lineRenderer.positionCount)
             return null;
         return points[currentIndex + 1];
+    }
+
+    public void SetFollowingTile(Tile tile) {
+        if (followingTile == null)
+            followingTile = tile;
+        else
+            Debug.LogError("Following tile already set");
     }
 
     private void InitializePoints() {
