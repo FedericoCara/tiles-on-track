@@ -32,14 +32,14 @@ public class SnapToGrid : MonoBehaviour {
 
     private void Snap() {
         transform.position = GetCurrentSnappingPosition();
-        OnSnap?.Invoke();
+        OnSnap();
     }
 
     private void UpdateCurrentCell() {
         var actualCell = (Vector2Int)_mainGrid.WorldToCell(transform.position);
         if (actualCell != currentCell) {
             currentCell = actualCell;
-            OnCellChanged?.Invoke();
+            OnCellChanged();
         }
     }
 }

@@ -1,25 +1,30 @@
 ﻿using System;
 using UnityEngine;
 
+[RequireComponent(typeof(Draggable))]
 [RequireComponent(typeof(SnapToGrid))]
 [RequireComponent(typeof(TileFinder))]
 public class DraggableTile :MonoBehaviour {
 
-    public event Action ReturnToInitialPosition = () => {};
-    
+    public bool IsDragging => _draggable.Dragging;
+    public event Action OnReturnToInitialPosition = () => {};
+    public event Action OnTileDropped = () => {};
+
     [SerializeField] private Tile tilePrefab;
+    private Draggable _draggable;
     private SnapToGrid _snapToGrid;
     private GameObject _previousPreview;
     private TileFinder _tileFinder;
 
     private void Awake() {
+        _draggable = GetComponent<Draggable>();
         _snapToGrid = GetComponent<SnapToGrid>();
         _snapToGrid.OnCellChanged += DrawTilePreview;
         _snapToGrid.OnSnap += TileDropped;
         _tileFinder = GetComponent<TileFinder>();
 
         var startingPosition = transform.position;
-        ReturnToInitialPosition += () => {
+        OnReturnToInitialPosition += () => {
             transform.position = startingPosition;
         };
     }
@@ -37,7 +42,8 @@ public class DraggableTile :MonoBehaviour {
             }
         }
 
-        _previousPreview.transform.position = _snapToGrid.GetCurrentSnappingPosition();
+        if(_previousPreview!=null)
+            _previousPreview.transform.position = _snapToGrid.GetCurrentSnappingPosition();
     }
 
     private void TileDropped() {
@@ -53,8 +59,9 @@ public class DraggableTile :MonoBehaviour {
             newTile.transform.position = _snapToGrid.GetCurrentSnappingPosition();
             correctConnection.SetFollowingTile(newTile);
             Destroy(gameObject);
+            OnTileDropped();
         } else {
-            ReturnToInitialPosition?.Invoke();
+            OnReturnToInitialPosition();
         }
     }
 

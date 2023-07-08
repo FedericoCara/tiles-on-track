@@ -21,6 +21,6 @@ public class Draggable : MonoBehaviour {
 
     private void OnMouseUp() {
         _dragging = false;
-        OnDraggableFinished?.Invoke();
+        OnDraggableFinished();
     }
 }
