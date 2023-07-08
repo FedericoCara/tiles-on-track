@@ -14,6 +14,9 @@ public class HideLineRendererInPlayMode : MonoBehaviour
 
     private void OnPlayModeStateChanged(UnityEditor.PlayModeStateChange state)
     {
+        if(lineRenderer==null)
+            return;
+        
         if (state == UnityEditor.PlayModeStateChange.ExitingEditMode)
         {
             lineRenderer.enabled = false;

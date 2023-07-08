@@ -2,21 +2,22 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 public class Tile : MonoBehaviour {
 
     [SerializeField] private LineRenderer lineRenderer;
     [SerializeField] private Tile followingTile;
-
+    [SerializeField] private TileDisplay display;
+    [SerializeField] private TileDirection nextTileDirection;
     private TilePoint[] points;
+    public Tile FollowingTile => followingTile;
+    public TileDirection NextTileDirection => nextTileDirection;
     
     private void Awake() {
         InitializePoints();
     }
 
-    public Tile GetFollowingTile() {
-        return followingTile;
-    }
 
     public TilePoint GetNextPoint(int currentIndex) {
         if (currentIndex + 1 >= lineRenderer.positionCount)
@@ -35,6 +36,24 @@ public class Tile : MonoBehaviour {
             };
         }
     }
+
+    public GameObject MakeCorrectPreview() {
+        var preview = Instantiate(this);
+        preview.display.MakeCorrectPreview();
+        return preview.gameObject;
+    }
+    
+    public GameObject MakeWrongPreview() {
+        var preview = Instantiate(this);
+        preview.display.MakeWrongPreview();
+        return preview.gameObject;
+    }
+}
+
+public enum TileDirection {
+    RIGHT,
+    UP,
+    DOWN
 }
 
 public class TilePoint {

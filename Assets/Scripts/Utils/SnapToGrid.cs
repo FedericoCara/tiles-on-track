@@ -4,9 +4,12 @@ using UnityEngine;
 [RequireComponent(typeof(Draggable))]
 public class SnapToGrid : MonoBehaviour {
 
-    [SerializeField] private LevelConfiguration levelConfig;
+    public event Action OnSnap = () => { };
+    public event Action OnCellChanged = () => { };
+
     private Draggable _draggable;
     private Grid _mainGrid;
+    private Vector2Int currentCell;
 
     private void Awake() {
         _draggable = GetComponent<Draggable>();
@@ -14,10 +17,29 @@ public class SnapToGrid : MonoBehaviour {
         _mainGrid = FindObjectOfType<Grid>();
     }
 
+    private void Update() {
+        if (_draggable.Dragging) {
+            UpdateCurrentCell();
+        }
+    }
+
+    public Vector2Int GetCurrentCellPosition() => (Vector2Int) _mainGrid.WorldToCell(transform.position);
+    
+    public Vector3 GetCurrentSnappingPosition() {
+        var cell = GetCurrentCellPosition();
+        return _mainGrid.GetCellCenterWorld((Vector3Int) cell);
+    }
+
     private void Snap() {
-        var cell = _mainGrid.WorldToCell(transform.position);
-        var newPosition = _mainGrid.GetCellCenterWorld(cell) + levelConfig.GridOffset;
-        transform.position = newPosition;
-        Debug.Log($"Snapping {name} to cell {cell} which is in world position {newPosition}");
+        transform.position = GetCurrentSnappingPosition();
+        OnSnap?.Invoke();
+    }
+
+    private void UpdateCurrentCell() {
+        var actualCell = (Vector2Int)_mainGrid.WorldToCell(transform.position);
+        if (actualCell != currentCell) {
+            currentCell = actualCell;
+            OnCellChanged?.Invoke();
+        }
     }
 }

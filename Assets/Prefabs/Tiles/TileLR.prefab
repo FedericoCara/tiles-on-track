@@ -92,9 +92,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1737615506023788419, guid: dacead7759b5d6742aebe05c933b4e66, type: 3}
+      propertyPath: display.spriteRenderers.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1737615506023788419, guid: dacead7759b5d6742aebe05c933b4e66, type: 3}
+      propertyPath: display.spriteRenderers.Array.data[2]
+      value: 
+      objectReference: {fileID: 8543836932477550474}
+    - target: {fileID: 1737615506023788419, guid: dacead7759b5d6742aebe05c933b4e66, type: 3}
+      propertyPath: display.spriteRenderers.Array.data[3]
+      value: 
+      objectReference: {fileID: 8543836932477550474}
     - target: {fileID: 3911798096097231685, guid: dacead7759b5d6742aebe05c933b4e66, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3911798096097231685, guid: dacead7759b5d6742aebe05c933b4e66, type: 3}
       propertyPath: m_LocalPosition.x

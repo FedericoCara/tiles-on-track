@@ -265,6 +265,7 @@ GameObject:
   - component: {fileID: 2181408219379042409}
   - component: {fileID: 5647315588257579952}
   - component: {fileID: 7232040664973170855}
+  - component: {fileID: 4622785668256234448}
   m_Layer: 0
   m_Name: DraggableTile
   m_TagString: Untagged
@@ -358,7 +359,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 677c9418003a495aa857d47e5e232ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelConfig: {fileID: 11400000, guid: 6256faf5aac26b842a613f1d3fb44f3e, type: 2}
+--- !u!114 &4622785668256234448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7128803159398337729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c09fa6067cb479280061d3c77caa018, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tilePrefab: {fileID: 2445702082805259313, guid: c519a35ace5bd6143834e97ff2fb5275, type: 3}
 --- !u!1 &7347418505221698468
 GameObject:
   m_ObjectHideFlags: 0

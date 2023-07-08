@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Draggable : MonoBehaviour {
     private bool _dragging = false;
+    public bool Dragging => _dragging;
     private Vector2 _offset;
     public event Action OnDraggableFinished = () => { };
     

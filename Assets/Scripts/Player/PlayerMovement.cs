@@ -38,7 +38,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void StartNextTile() {
-        currentTile = currentTile.GetFollowingTile();
+        currentTile = currentTile.FollowingTile;
         pointFollowing = null;
         currentIndex = 0;
         if (currentTile == null)
