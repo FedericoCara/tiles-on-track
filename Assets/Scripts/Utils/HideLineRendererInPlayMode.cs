@@ -14,6 +14,7 @@ public class HideLineRendererInPlayMode : MonoBehaviour
         #endif
     }
 
+    #if UNITY_EDITOR
     private void OnPlayModeStateChanged(UnityEditor.PlayModeStateChange state)
     {
         if(lineRenderer==null)
@@ -28,4 +29,5 @@ public class HideLineRendererInPlayMode : MonoBehaviour
             lineRenderer.enabled = true;
         }
     }
+    #endif
 }

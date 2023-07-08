@@ -60,3 +60,6 @@ ios test/
 android deploy/
 webgl deploy/
 web deploy/
+Gif/
+
+win deploy.zip
