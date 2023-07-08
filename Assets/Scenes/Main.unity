@@ -592,7 +592,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 00000000c35e2e7a
+  m_ApplyToSortingLayers: 00000000c35e2e7a3709d8ec
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -1228,6 +1228,10 @@ PrefabInstance:
     - target: {fileID: 3714432509313413350, guid: fab0faa0f31ea024897ee48fb540f9ee, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4248464564599346239, guid: fab0faa0f31ea024897ee48fb540f9ee, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

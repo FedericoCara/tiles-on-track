@@ -9,6 +9,8 @@ public class HideLineRendererInPlayMode : MonoBehaviour
         lineRenderer = GetComponent<LineRenderer>();
         #if UNITY_EDITOR
         UnityEditor.EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
+        #else
+        lineRenderer.enabled = false;
         #endif
     }
 

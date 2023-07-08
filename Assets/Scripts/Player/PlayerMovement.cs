@@ -15,9 +15,11 @@ public class PlayerMovement : MonoBehaviour {
 
     private void Start() {
         currentTile = startingTile;
+        StartCoroutine(CheckIfItIsStillEndReached());
     }
 
     // Update is called once per frame
+
     void Update()
     {
         if(endReached)
@@ -37,12 +39,28 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
+    private IEnumerator CheckIfItIsStillEndReached() {
+        while (true) {
+            yield return new WaitForSeconds(0.5f);
+            if (endReached) {
+                StartNextTile();
+            }
+        }
+    }
+
     private void StartNextTile() {
-        currentTile = currentTile.FollowingTile;
+        var followingTile = currentTile.FollowingTile;
         pointFollowing = null;
         currentIndex = 0;
-        if (currentTile == null)
+        if (followingTile == null)
             SetEndReached();
+        else 
+            UpdateCurrentTile(followingTile);
+    }
+
+    private void UpdateCurrentTile(Tile followingTile) {
+        currentTile = followingTile;
+        endReached = false;
     }
 
     private bool PointReached(TilePoint tilePoint) =>
