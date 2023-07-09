@@ -102,7 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   strategy: {fileID: 8425388893378442503}
   firstSpawnDelay: 2
-  spawnDraggableFrequency: 5
+  spawnDraggableFrequency: 3
   draggableTilePrefab: {fileID: 4622785668256234448, guid: 4b8ddfcda68ed3043b5dba34be7da83a, type: 3}
   possibleTiles:
   - {fileID: 2799466830775885007, guid: ca5544aa8f202364c8fe81eb517a93de, type: 3}

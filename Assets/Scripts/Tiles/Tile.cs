@@ -16,18 +16,56 @@ public class Tile : MonoBehaviour {
     public TileDirection ComingTileDirection => comingTileDirection;
     public TileDirection NextTileDirection => nextTileDirection;
 
+    public bool IsNextTileInReverse => FollowingTile != null &&
+                                       (FollowingTile.IsReversable &&
+                                        IsLastPointTheLastPointOfTheOtherTile() ||
+                                        IsReversable && !FollowingTile.IsReversable &&
+                                        IsFirstPointTheFirstPointOfTheOtherTile() ||
+                                        IsReversable && FollowingTile.IsReversable &&
+                                        IsFirstPointTheLastPointOfTheOtherTile());
+
+    private bool IsLastPointTheLastPointOfTheOtherTile() =>
+        Vector2.SqrMagnitude(GetLastPointPosition() - FollowingTile.GetLastPointPosition()) < 0.05f;
+    private bool IsFirstPointTheFirstPointOfTheOtherTile() =>
+        Vector2.SqrMagnitude(GetFirstPointPosition() - FollowingTile.GetFirstPointPosition()) < 0.05f;
+    private bool IsFirstPointTheLastPointOfTheOtherTile() =>
+        Vector2.SqrMagnitude(GetFirstPointPosition() - FollowingTile.GetLastPointPosition()) < 0.05f;
+
+    private Vector2 GetLastPointPosition() => points[^1].point;
+    private Vector2 GetFirstPointPosition() => points[0].point;
+
+
     public bool IsReversable => comingTileDirection == TileDirection.UP && nextTileDirection == TileDirection.DOWN ||
-                              comingTileDirection == TileDirection.DOWN && nextTileDirection == TileDirection.UP;
+                                comingTileDirection == TileDirection.DOWN && nextTileDirection == TileDirection.UP;
     
     private void Start() {
         InitializePoints();
     }
 
 
+    private void InitializePoints() {
+        Vector3[] positions = new Vector3[lineRenderer.positionCount];
+        lineRenderer.GetPositions(positions);
+        points = new TilePoint[lineRenderer.positionCount];
+        for (int i = 0; i < lineRenderer.positionCount; i++) {
+            points[i] = new TilePoint {
+                point = lineRenderer.transform.TransformPoint(lineRenderer.GetPosition(i)),
+                isLast = i == lineRenderer.positionCount - 1,
+                isFirst = i == 0
+            };
+        }
+    }
+
     public TilePoint GetNextPoint(int currentIndex) {
         if (currentIndex + 1 >= lineRenderer.positionCount)
             return null;
         return points[currentIndex + 1];
+    }
+
+    public TilePoint GetPreviousPoint(int currentIndex) {
+        if (currentIndex == 0)
+            return null;
+        return points[currentIndex - 1];
     }
 
     public void SetFollowingTile(Tile tile) {
@@ -37,24 +75,12 @@ public class Tile : MonoBehaviour {
             Debug.LogError("Following tile already set");
     }
 
-    private void InitializePoints() {
-        Vector3[] positions = new Vector3[lineRenderer.positionCount];
-        lineRenderer.GetPositions(positions);
-        points = new TilePoint[lineRenderer.positionCount];
-        for (int i = 0; i < lineRenderer.positionCount; i++) {
-            points[i] = new TilePoint {
-                point = lineRenderer.transform.TransformPoint(lineRenderer.GetPosition(i)),
-                isLast = i == lineRenderer.positionCount - 1
-            };
-        }
-    }
-
     public GameObject MakeCorrectTilePreview() {
         var preview = Instantiate(this);
         preview.display.MakeCorrectPreview();
         return preview.gameObject;
     }
-    
+
     public GameObject MakeWrongTilePreview() {
         var preview = Instantiate(this);
         preview.display.MakeWrongPreview();
@@ -81,6 +107,8 @@ public class Tile : MonoBehaviour {
         direction1 == TileDirection.DOWN && direction2 == TileDirection.UP ||
         direction1 == TileDirection.LEFT && direction2 == TileDirection.RIGHT ||
         direction1 == TileDirection.RIGHT && direction2 == TileDirection.LEFT;
+
+    public int GetLastPointIndex() => points.Length - 1;
 }
 
 public enum TileDirection {
@@ -93,4 +121,5 @@ public enum TileDirection {
 public class TilePoint {
     public Vector2 point;
     public bool isLast;
+    public bool isFirst;
 }

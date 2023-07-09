@@ -1,8 +1,15 @@
 ﻿using System.Collections.Generic;
+using Mimic;
 using UnityEngine;
 
 public class ConveyorTileStrategy : MonoBehaviour {
+
+    private List<Tile> tilesToGive = new();
     public Tile CalculateTile(List<Tile> possibleTiles) {
-        return possibleTiles[Random.Range(0, possibleTiles.Count - 1)];
+        if (tilesToGive.IsEmpty()) {
+            tilesToGive.AddRange(possibleTiles);
+        }
+        
+        return tilesToGive.RemoveElementAtRandom();
     }
 }

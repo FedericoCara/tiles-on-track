@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour {
     private TilePoint pointFollowing;
     private Vector2 direction;
     private int currentIndex;
+    private bool isTraversingInReverse = false;
     private bool endReached = false;
 
     private void Start() {
@@ -29,14 +30,18 @@ public class PlayerMovement : MonoBehaviour {
             SetNextPoint();
         } else {
             transform.position += (Vector3)(direction * speed * Time.deltaTime);
-            if (PointReached(pointFollowing)) {
-                if (pointFollowing.isLast) {
+            if (PointReached()) {
+                if (IsLastPointReached()) {
                     StartNextTile();
                 } else {
                     SetNextPoint();
                 }
             }
         }
+    }
+
+    private bool IsLastPointReached() {
+        return isTraversingInReverse ? pointFollowing.isFirst : pointFollowing.isLast;
     }
 
     private IEnumerator CheckIfItIsStillEndReached() {
@@ -51,7 +56,6 @@ public class PlayerMovement : MonoBehaviour {
     private void StartNextTile() {
         var followingTile = currentTile.FollowingTile;
         pointFollowing = null;
-        currentIndex = 0;
         if (followingTile == null)
             SetEndReached();
         else 
@@ -59,17 +63,26 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void UpdateCurrentTile(Tile followingTile) {
+        isTraversingInReverse = currentTile.IsNextTileInReverse;
+        if(isTraversingInReverse)
+            currentIndex = followingTile.GetLastPointIndex();
+        else 
+            currentIndex = 0;
+        
         currentTile = followingTile;
         endReached = false;
     }
 
-    private bool PointReached(TilePoint tilePoint) =>
+    private bool PointReached() =>
         Vector2.SqrMagnitude(pointFollowing.point - (Vector2) transform.position) < 0.05f;
 
     private void SetNextPoint() {
-        pointFollowing = currentTile.GetNextPoint(currentIndex);
+        pointFollowing = isTraversingInReverse? currentTile.GetPreviousPoint(currentIndex) : currentTile.GetNextPoint(currentIndex);
         if (pointFollowing != null) {
-            currentIndex++;
+            if (isTraversingInReverse)
+                currentIndex--;
+            else
+                currentIndex++;
             direction = pointFollowing.point - (Vector2) transform.position;
             direction.Normalize();  
             TurnToPoint();
