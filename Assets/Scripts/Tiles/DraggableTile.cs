@@ -44,7 +44,7 @@ public class DraggableTile :MonoBehaviour {
         var cell = _snapToGrid.GetCurrentCellPosition();
         var connections = _tileFinder.GetConnections(cell);
         if (connections.Center == null) {
-            if (connections.GetCorrectConnection(tilePrefab.ComingTileDirection)!=null) {
+            if (connections.GetCorrectConnection(tilePrefab.ComingTileDirection, tilePrefab.IsReversable)!=null) {
                 _previousPreview = tilePrefab.MakeCorrectTilePreview();
             } else {
                 _previousPreview = tilePrefab.MakeWrongTilePreview();
@@ -60,7 +60,7 @@ public class DraggableTile :MonoBehaviour {
 
         var cell = _snapToGrid.GetCurrentCellPosition();
         var connections = _tileFinder.GetConnections(cell);
-        var correctConnection = connections.GetCorrectConnection(tilePrefab.ComingTileDirection);
+        var correctConnection = connections.GetCorrectConnection(tilePrefab.ComingTileDirection, tilePrefab.IsReversable);
         
         if (correctConnection!=null) {
             var grid = FindObjectOfType<Grid>();

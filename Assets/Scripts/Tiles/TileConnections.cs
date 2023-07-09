@@ -13,12 +13,12 @@
         Down = down;
     }
 
-    public Tile GetCorrectConnection(TileDirection comingDirection) {
-        if (Down != null && Down.CanConnectWith(comingDirection, TileDirection.UP))
+    public Tile GetCorrectConnection(TileDirection comingDirection, bool isNewTileReversible) {
+        if (Down != null && Down.CanConnectWith(comingDirection, TileDirection.UP, isNewTileReversible))
             return Down;
-        if (Left != null && Left.CanConnectWith(comingDirection, TileDirection.RIGHT))
+        if (Left != null && Left.CanConnectWith(comingDirection, TileDirection.RIGHT, isNewTileReversible))
             return Left;
-        if (Up != null && Up.CanConnectWith(comingDirection, TileDirection.DOWN))
+        if (Up != null && Up.CanConnectWith(comingDirection, TileDirection.DOWN, isNewTileReversible))
             return Up;
         return null;
     }

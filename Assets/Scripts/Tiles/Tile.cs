@@ -69,10 +69,12 @@ public class Tile : MonoBehaviour {
         Destroy(preview.GetComponentInChildren<Collider2D>());
     }
 
-    public bool CanConnectWith(TileDirection otherTileEntryDirection, TileDirection otherTilePutDirection) =>
+    public bool CanConnectWith(TileDirection otherTileEntryDirection, TileDirection otherTilePutDirection, bool otherTileIsReversable) =>
         followingTile == null &&
         (AreOpposite(NextTileDirection,otherTileEntryDirection) && NextTileDirection == otherTilePutDirection ||
-         IsReversable && AreOpposite(ComingTileDirection, otherTileEntryDirection) && ComingTileDirection == otherTilePutDirection);
+         IsReversable && AreOpposite(ComingTileDirection, otherTileEntryDirection) && ComingTileDirection == otherTilePutDirection ||
+         otherTileIsReversable && NextTileDirection == otherTileEntryDirection && NextTileDirection == otherTilePutDirection ||
+         IsReversable && otherTileIsReversable && ComingTileDirection == otherTileEntryDirection && ComingTileDirection == otherTilePutDirection);
 
     private bool AreOpposite(TileDirection direction1, TileDirection direction2) =>
         direction1 == TileDirection.UP && direction2 == TileDirection.DOWN ||
