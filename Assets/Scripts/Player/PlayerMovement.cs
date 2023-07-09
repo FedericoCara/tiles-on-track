@@ -14,7 +14,9 @@ public class PlayerMovement : MonoBehaviour {
     private bool isTraversingInReverse = false;
     private bool endReached = false;
     private bool fighting = false;
+    private bool drinking = false;
     public Action<Enemy> OnFightStarted = enemy => { };
+    public Action<Potion> OnDrinkingStarted = potion => { };
 
     private void Start() {
         currentTile = startingTile;
@@ -25,7 +27,7 @@ public class PlayerMovement : MonoBehaviour {
 
     void Update()
     {
-        if(endReached || fighting)
+        if(endReached || fighting || drinking)
             return;
         
         if (pointFollowing == null) {
@@ -37,6 +39,8 @@ public class PlayerMovement : MonoBehaviour {
                     StartNextTile();
                 } else if (IsFightPointReached()) {
                     StartFight();
+                } else if (IsPotionPointReached()) {
+                    DrinkPotion();
                 } else {
                     SetNextPoint();
                 }
@@ -50,6 +54,10 @@ public class PlayerMovement : MonoBehaviour {
 
     private bool IsFightPointReached() {
         return pointFollowing.stopsForEnemy;
+    }
+
+    private bool IsPotionPointReached() {
+        return pointFollowing.stopsForPotion;
     }
 
     private IEnumerator CheckIfItIsStillEndReached() {
@@ -73,6 +81,11 @@ public class PlayerMovement : MonoBehaviour {
     private void StartFight() {
         fighting = true;
         OnFightStarted(currentTile.Enemy);
+    }
+
+    private void DrinkPotion() {
+        drinking = true;
+        OnDrinkingStarted(currentTile.Potion);
     }
 
     private void UpdateCurrentTile(Tile followingTile) {
@@ -112,6 +125,11 @@ public class PlayerMovement : MonoBehaviour {
 
     public void SetFightFinished() {
         fighting = false;
+        SetNextPoint();
+    }
+
+    public void SetDrinkingFinished() {
+        drinking = false;
         SetNextPoint();
     }
 }

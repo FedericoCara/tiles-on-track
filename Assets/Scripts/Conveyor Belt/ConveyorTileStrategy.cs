@@ -23,7 +23,7 @@ public class ConveyorTileStrategy : MonoBehaviour {
             _tilesToGive.AddRange(possibleTiles);
         }
 
-        return ShouldGivePotion() ?? ShouldGiveEnemy(playerLevel) ?? _tilesToGive.RemoveElementAtRandom();
+        return  ShouldGiveEnemy(playerLevel) ?? ShouldGivePotion() ??_tilesToGive.RemoveElementAtRandom();
     }
 
     private Tile ShouldGivePotion() {

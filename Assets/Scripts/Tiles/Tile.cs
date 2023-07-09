@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Mimic;
@@ -52,6 +53,7 @@ public class Tile : MonoBehaviour {
     public bool HasPotion => potionInTile.Potion != null;
 
     public Enemy Enemy => _enemy;
+    public Potion Potion => potionInTile.Potion;
 
     private void Start() {
         InitializePoints();
@@ -69,7 +71,8 @@ public class Tile : MonoBehaviour {
                 point = lineRenderer.transform.TransformPoint(lineRenderer.GetPosition(i)),
                 isLast = i == lineRenderer.positionCount - 1,
                 isFirst = i == 0,
-                stopsForEnemy = hasEnemy && i == enemyData.PlayerPointIndex
+                stopsForEnemy = hasEnemy && i == enemyData.PlayerPointIndex,
+                stopsForPotion = HasPotion && i == potionInTile.PlayerPointIndex
             };
         }
     }
@@ -165,9 +168,11 @@ public enum TileDirection {
     LEFT
 }
 
+[Serializable]
 public class TilePoint {
     public Vector2 point;
     public bool isLast;
     public bool isFirst;
     public bool stopsForEnemy;
+    public bool stopsForPotion;
 }
