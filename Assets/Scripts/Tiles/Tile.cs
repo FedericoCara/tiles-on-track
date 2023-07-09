@@ -138,6 +138,7 @@ public class Tile : MonoBehaviour {
         _enemy = Instantiate(enemyData.EnemyPrefab, transform);
         _enemy.transform.position = Points[enemyData.EnemyPointIndex].point;
         enemyData.EnemyDisplay.SetEnemy(_enemy);
+        _enemy.EnemyFightDisplay.Hide();
         return _enemy;
     }
 

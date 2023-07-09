@@ -52,8 +52,12 @@ public class PlayerFightManager : MonoBehaviour {
                     _fighting = false;
                     Destroy(_player.gameObject);
                     OnPlayerDefeated();
+                    return;
                 }
             }
+            
+            _opponent.EnemyFightDisplay.SetLifePercentage(_opponent.HealthPercentage);
+            _opponent.EnemyFightDisplay.SetAttackPercentage(_opponentPreparingAttack/_opponent.FrequencySeconds);
         }
     }
 
@@ -62,5 +66,6 @@ public class PlayerFightManager : MonoBehaviour {
         _opponent = enemy;
         _playerPreparingAttack = 0;
         _opponentPreparingAttack = 0;
+        _opponent.EnemyFightDisplay.Show();
     }
 }
