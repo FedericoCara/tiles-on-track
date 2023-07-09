@@ -19,8 +19,6 @@ public class Tile : MonoBehaviour {
     public bool IsNextTileInReverse => FollowingTile != null &&
                                        (FollowingTile.IsReversable &&
                                         IsLastPointTheLastPointOfTheOtherTile() ||
-                                        IsReversable && !FollowingTile.IsReversable &&
-                                        IsFirstPointTheFirstPointOfTheOtherTile() ||
                                         IsReversable && FollowingTile.IsReversable &&
                                         IsFirstPointTheLastPointOfTheOtherTile());
 
