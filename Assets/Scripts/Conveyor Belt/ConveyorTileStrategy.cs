@@ -6,30 +6,45 @@ public class ConveyorTileStrategy : MonoBehaviour {
     
     [SerializeField] private List<Tile> possibleTiles;
     [SerializeField] private List<Tile> possibleEnemyTiles;
+    [SerializeField] private List<Tile> possiblePotionTiles;
     [SerializeField] private Tile finalBossTile;
     [SerializeField] private List<Enemy> possibleEnemies;
     [SerializeField] private float enemyFrequency = 0.3f;
-    private List<Tile> tilesToGive = new();
-    private List<Tile> enemyTilesToGive = new();
+    [SerializeField] private float potionFrequency = 0.1f;
+    private List<Tile> _tilesToGive = new();
+    private List<Tile> _enemyTilesToGive = new();
+    private List<Tile> _potionTilesToGive = new();
     private float enemyFrequencyAccumulated = 0;
+    private float potionFrequencyAccumulated = 0;
     private bool finalBossDelivered = false;
 
     public Tile CalculateTile(int playerLevel) {
-        if (tilesToGive.IsEmpty()) {
-            tilesToGive.AddRange(possibleTiles);
+        if (_tilesToGive.IsEmpty()) {
+            _tilesToGive.AddRange(possibleTiles);
         }
 
-        Tile enemyTile = ShouldGiveEnemy(playerLevel);
-        
-        return enemyTile ?? tilesToGive.RemoveElementAtRandom();
+        return ShouldGivePotion() ?? ShouldGiveEnemy(playerLevel) ?? _tilesToGive.RemoveElementAtRandom();
+    }
+
+    private Tile ShouldGivePotion() {
+        potionFrequencyAccumulated += potionFrequency;
+        if (Random.value < potionFrequencyAccumulated) {
+            potionFrequencyAccumulated = 0;
+            if(_potionTilesToGive.IsEmpty())
+                _potionTilesToGive.AddRange(possiblePotionTiles);
+
+            return _potionTilesToGive.RemoveElementAtRandom();
+        }
+
+        return null;
     }
 
     private Tile ShouldGiveEnemy(int playerLevel) {
         enemyFrequencyAccumulated += enemyFrequency;
         if (Random.value < enemyFrequencyAccumulated) {
             enemyFrequencyAccumulated = 0;
-            if(enemyTilesToGive.IsEmpty())
-                enemyTilesToGive.AddRange(possibleEnemyTiles);
+            if(_enemyTilesToGive.IsEmpty())
+                _enemyTilesToGive.AddRange(possibleEnemyTiles);
             var enemy = GetEnemy(playerLevel);
             
             if (enemy.IsFinalBoss) {
@@ -37,7 +52,7 @@ public class ConveyorTileStrategy : MonoBehaviour {
                 return finalBossTile;
             }
 
-            var enemyTile = enemyTilesToGive.RemoveElementAtRandom();
+            var enemyTile = _enemyTilesToGive.RemoveElementAtRandom();
             enemyTile.SetEnemy(enemy);
             return enemyTile;
         }

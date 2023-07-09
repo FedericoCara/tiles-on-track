@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using Mimic;
@@ -14,6 +13,8 @@ public class Tile : MonoBehaviour {
     [SerializeField] private TileDirection nextTileDirection;
     [SerializeField] private bool hasEnemy = false;
     [SerializeField] private EnemyInTile enemyData;
+    [SerializeField] private PotionInTile potionInTile;
+
     private TilePoint[] points;
     private Enemy _enemy;
 
@@ -48,6 +49,7 @@ public class Tile : MonoBehaviour {
 
     public bool IsReversable => comingTileDirection == TileDirection.UP && nextTileDirection == TileDirection.DOWN ||
                                 comingTileDirection == TileDirection.DOWN && nextTileDirection == TileDirection.UP;
+    public bool HasPotion => potionInTile.Potion != null;
 
     public Enemy Enemy => _enemy;
 
@@ -112,11 +114,15 @@ public class Tile : MonoBehaviour {
         if (previewTileComponent.hasEnemy) {
             SpawnEnemyPreviewIfNecessary(previewTileComponent);
             previewTileComponent.enemyData.EnemyDisplay.ChangeSortLayer(sortLayerName);
+        }else if (previewTileComponent.HasPotion) {
+            previewTileComponent.potionInTile.ChangeSortLayer(sortLayerName);
+            Destroy(previewTileComponent.potionInTile.Potion);
         }
 
         Destroy(previewTileComponent);
         Destroy(previewTileComponent.GetComponentInChildren<Collider2D>());
     }
+
 
     private void SpawnEnemyPreviewIfNecessary(Tile previewTileComponent) {
         if (previewTileComponent.hasEnemy) {

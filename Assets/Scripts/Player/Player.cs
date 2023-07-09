@@ -31,4 +31,6 @@ public class Player : MonoBehaviour, IPlayerEvents {
     public void AddExperience(int exp) => playerData.AddExperience(exp);
 
     public void ReceiveDamage(int opponentDamage) => playerData.ReceiveDamage(opponentDamage);
+
+    public void GainLife(int healAmount) => playerData.GainLife(healAmount);
 }

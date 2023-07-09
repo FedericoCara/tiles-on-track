@@ -39,6 +39,12 @@ public class PlayerData : IPlayerEvents{
             NotifyHealthUpdated();
     }
 
+    public void GainLife(int healAmount) {
+        ValidateMaxHealth();
+        health = Mathf.Clamp(health + healAmount, 0, MaxHealth);
+        NotifyHealthUpdated();
+    }
+
     private void UpdateLevelIfNecessary() {
         SetStartingRequiredExperienceIfNecessary();
 
@@ -75,6 +81,7 @@ public class PlayerData : IPlayerEvents{
     private int CalculateHealthForNextLevel() => playerLevelStrategy.CalculateHealthForNextLevel(MaxHealth);
 
     private int CalculateDamageForNextLevel() => playerLevelStrategy.CalculateDamageForNextLevel(playerAttack.Damage);
+
 
     private void ValidateMaxHealth() {
         if (MaxHealth <= 0)
