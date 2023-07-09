@@ -14,6 +14,8 @@ public class Player : MonoBehaviour, IPlayerEvents {
     
     private PlayerMovement _playerMovement;
     public int Level => playerData.Level;
+    public PlayerAttack PlayerAttack => playerData.PlayerAttack;
+    public bool IsDead => playerData.Health<=0;
 
     private void Awake() {
         playerData.OnExperienceGained += experienceGained => OnExperienceGained(experienceGained);
@@ -23,7 +25,7 @@ public class Player : MonoBehaviour, IPlayerEvents {
         _playerMovement = GetComponent<PlayerMovement>();
     }
 
-    private void Update() {
-        
-    }
+    public void AddExperience(int exp) => playerData.AddExperience(exp);
+
+    public void ReceiveDamage(int opponentDamage) => playerData.ReceiveDamage(opponentDamage);
 }

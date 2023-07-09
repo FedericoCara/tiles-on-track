@@ -13,6 +13,8 @@ public class PlayerMovement : MonoBehaviour {
     private int currentIndex;
     private bool isTraversingInReverse = false;
     private bool endReached = false;
+    private bool fighting = false;
+    public Action<Enemy> OnFightStarted = enemy => { };
 
     private void Start() {
         currentTile = startingTile;
@@ -23,7 +25,7 @@ public class PlayerMovement : MonoBehaviour {
 
     void Update()
     {
-        if(endReached)
+        if(endReached || fighting)
             return;
         
         if (pointFollowing == null) {
@@ -33,6 +35,8 @@ public class PlayerMovement : MonoBehaviour {
             if (PointReached()) {
                 if (IsLastPointReached()) {
                     StartNextTile();
+                } else if (IsFightPointReached()) {
+                    StartFight();
                 } else {
                     SetNextPoint();
                 }
@@ -42,6 +46,10 @@ public class PlayerMovement : MonoBehaviour {
 
     private bool IsLastPointReached() {
         return isTraversingInReverse ? pointFollowing.isFirst : pointFollowing.isLast;
+    }
+
+    private bool IsFightPointReached() {
+        return pointFollowing.stopsForEnemy;
     }
 
     private IEnumerator CheckIfItIsStillEndReached() {
@@ -60,6 +68,11 @@ public class PlayerMovement : MonoBehaviour {
             SetEndReached();
         else 
             UpdateCurrentTile(followingTile);
+    }
+
+    private void StartFight() {
+        fighting = true;
+        OnFightStarted(currentTile.Enemy);
     }
 
     private void UpdateCurrentTile(Tile followingTile) {
@@ -84,7 +97,7 @@ public class PlayerMovement : MonoBehaviour {
             else
                 currentIndex++;
             direction = pointFollowing.point - (Vector2) transform.position;
-            direction.Normalize();  
+            direction.Normalize();
             TurnToPoint();
         }
     }
@@ -95,5 +108,10 @@ public class PlayerMovement : MonoBehaviour {
 
     private void SetEndReached() {
         endReached = true;
+    }
+
+    public void SetFightFinished() {
+        fighting = false;
+        SetNextPoint();
     }
 }

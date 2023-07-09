@@ -15,6 +15,8 @@ public class Tile : MonoBehaviour {
     [SerializeField] private bool hasEnemy = false;
     [SerializeField] private EnemyInTile enemyData;
     private TilePoint[] points;
+    private Enemy _enemy;
+
     private TilePoint[] Points {
         get {
             if(points==null)
@@ -25,6 +27,7 @@ public class Tile : MonoBehaviour {
     public Tile FollowingTile => followingTile;
     public TileDirection ComingTileDirection => comingTileDirection;
     public TileDirection NextTileDirection => nextTileDirection;
+    public bool HasEnemy => hasEnemy;
 
     public bool IsNextTileInReverse => FollowingTile != null &&
                                        (FollowingTile.IsReversable &&
@@ -45,7 +48,9 @@ public class Tile : MonoBehaviour {
 
     public bool IsReversable => comingTileDirection == TileDirection.UP && nextTileDirection == TileDirection.DOWN ||
                                 comingTileDirection == TileDirection.DOWN && nextTileDirection == TileDirection.UP;
-    
+
+    public Enemy Enemy => _enemy;
+
     private void Start() {
         InitializePoints();
     }
@@ -61,7 +66,8 @@ public class Tile : MonoBehaviour {
             points[i] = new TilePoint {
                 point = lineRenderer.transform.TransformPoint(lineRenderer.GetPosition(i)),
                 isLast = i == lineRenderer.positionCount - 1,
-                isFirst = i == 0
+                isFirst = i == 0,
+                stopsForEnemy = hasEnemy && i == enemyData.PlayerPointIndex
             };
         }
     }
@@ -119,11 +125,11 @@ public class Tile : MonoBehaviour {
         }
     }
 
-    private Enemy SpawnEnemy() {
-        var enemy = Instantiate(enemyData.EnemyPrefab, transform);
-        enemy.transform.position = Points[enemyData.EnemyPointIndex].point;
-        enemyData.EnemyDisplay.SetEnemy(enemy);
-        return enemy;
+    public Enemy SpawnEnemy() {
+        _enemy = Instantiate(enemyData.EnemyPrefab, transform);
+        _enemy.transform.position = Points[enemyData.EnemyPointIndex].point;
+        enemyData.EnemyDisplay.SetEnemy(_enemy);
+        return _enemy;
     }
 
     public bool CanConnectWith(TileDirection otherTileEntryDirection, TileDirection otherTilePutDirection, bool otherTileIsReversable) =>

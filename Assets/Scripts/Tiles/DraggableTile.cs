@@ -67,6 +67,8 @@ public class DraggableTile :MonoBehaviour {
             Tile newTile = Instantiate(tilePrefab, grid.transform);
             newTile.transform.position = _snapToGrid.GetCurrentSnappingPosition();
             correctConnection.SetFollowingTile(newTile);
+            if(newTile.HasEnemy)
+                newTile.SpawnEnemy();
             Destroy(gameObject);
             OnTileDropped();
         } else {

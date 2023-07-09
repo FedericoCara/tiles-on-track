@@ -13,4 +13,15 @@ public class Enemy : MonoBehaviour {
     public int ExperienceGiven => experienceGiven;
     [SerializeField] private bool isFinalBoss = false;
     public bool IsFinalBoss => isFinalBoss;
+    public bool IsDead => health <= 0;
+    
+    public void ReceiveDamage(int damage) {
+        health = Mathf.Clamp(health - damage, 0 , int.MaxValue);
+        if (IsDead)
+            DisplayDead();
+    }
+
+    private void DisplayDead() {
+        Destroy(gameObject);
+    }
 }

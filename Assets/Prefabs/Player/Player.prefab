@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 4094691091569909566}
   - component: {fileID: 3741230788241364525}
   - component: {fileID: 2648262079575860405}
+  - component: {fileID: 1492382265769312176}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -149,3 +150,15 @@ MonoBehaviour:
     health: 100
     level: 1
     playerLevelStrategy: {fileID: 11400000, guid: b9b38989d1358ff458c8c42f2397c295, type: 2}
+--- !u!114 &1492382265769312176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6543567783355447011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f0ac1bb5db64a45af4d9dfbb6a6944b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
