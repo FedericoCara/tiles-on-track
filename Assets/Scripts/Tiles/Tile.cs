@@ -15,6 +15,13 @@ public class Tile : MonoBehaviour {
     [SerializeField] private bool hasEnemy = false;
     [SerializeField] private EnemyInTile enemyData;
     private TilePoint[] points;
+    private TilePoint[] Points {
+        get {
+            if(points==null)
+                InitializePoints();
+            return points;
+        }
+    }
     public Tile FollowingTile => followingTile;
     public TileDirection ComingTileDirection => comingTileDirection;
     public TileDirection NextTileDirection => nextTileDirection;
@@ -45,6 +52,8 @@ public class Tile : MonoBehaviour {
 
 
     private void InitializePoints() {
+        if(points!=null)
+            return;
         Vector3[] positions = new Vector3[lineRenderer.positionCount];
         lineRenderer.GetPositions(positions);
         points = new TilePoint[lineRenderer.positionCount];
@@ -79,21 +88,42 @@ public class Tile : MonoBehaviour {
     public GameObject MakeCorrectTilePreview() {
         var preview = Instantiate(this);
         preview.display.MakeCorrectPreview();
+        SpawnEnemyPreviewIfNecessary(preview);
         return preview.gameObject;
     }
 
     public GameObject MakeWrongTilePreview() {
         var preview = Instantiate(this);
         preview.display.MakeWrongPreview();
+        SpawnEnemyPreviewIfNecessary(preview);
         return preview.gameObject;
     }
 
     public void MakeDraggablePreview(Transform previewParent, string sortLayerName) {
-        var preview = Instantiate(this, previewParent);
-        preview.display.DestroyBackgroundSprites();
-        preview.display.ChangeSortLayer(sortLayerName);
-        Destroy(preview);
-        Destroy(preview.GetComponentInChildren<Collider2D>());
+        var previewTileComponent = Instantiate(this, previewParent);
+        previewTileComponent.display.DestroyBackgroundSprites();
+        previewTileComponent.display.ChangeSortLayer(sortLayerName);
+        if (previewTileComponent.hasEnemy) {
+            SpawnEnemyPreviewIfNecessary(previewTileComponent);
+            previewTileComponent.enemyData.EnemyDisplay.ChangeSortLayer(sortLayerName);
+        }
+
+        Destroy(previewTileComponent);
+        Destroy(previewTileComponent.GetComponentInChildren<Collider2D>());
+    }
+
+    private void SpawnEnemyPreviewIfNecessary(Tile previewTileComponent) {
+        if (previewTileComponent.hasEnemy) {
+            var enemyPreviewComponent = previewTileComponent.SpawnEnemy();
+            Destroy(enemyPreviewComponent);
+        }
+    }
+
+    private Enemy SpawnEnemy() {
+        var enemy = Instantiate(enemyData.EnemyPrefab, transform);
+        enemy.transform.position = Points[enemyData.EnemyPointIndex].point;
+        enemyData.EnemyDisplay.SetEnemy(enemy);
+        return enemy;
     }
 
     public bool CanConnectWith(TileDirection otherTileEntryDirection, TileDirection otherTilePutDirection, bool otherTileIsReversable) =>
