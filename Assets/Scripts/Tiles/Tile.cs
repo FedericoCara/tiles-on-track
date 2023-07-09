@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Mimic;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -11,7 +12,8 @@ public class Tile : MonoBehaviour {
     [SerializeField] private TileDisplay display;
     [SerializeField] private TileDirection comingTileDirection;
     [SerializeField] private TileDirection nextTileDirection;
-    [SerializeField] private EnemyData enemyData;
+    [SerializeField] private bool hasEnemy = false;
+    [SerializeField] private EnemyInTile enemyData;
     private TilePoint[] points;
     public Tile FollowingTile => followingTile;
     public TileDirection ComingTileDirection => comingTileDirection;
@@ -100,6 +102,10 @@ public class Tile : MonoBehaviour {
          IsReversable && AreOpposite(ComingTileDirection, otherTileEntryDirection) && ComingTileDirection == otherTilePutDirection ||
          otherTileIsReversable && NextTileDirection == otherTileEntryDirection && NextTileDirection == otherTilePutDirection ||
          IsReversable && otherTileIsReversable && ComingTileDirection == otherTileEntryDirection && ComingTileDirection == otherTilePutDirection);
+
+    public void SetEnemy(Enemy enemy) {
+        enemyData.SetEnemy(enemy);
+    }
 
     private bool AreOpposite(TileDirection direction1, TileDirection direction2) =>
         direction1 == TileDirection.UP && direction2 == TileDirection.DOWN ||

@@ -104,13 +104,6 @@ MonoBehaviour:
   firstSpawnDelay: 1
   spawnDraggableFrequency: 3
   draggableTilePrefab: {fileID: 4622785668256234448, guid: 4b8ddfcda68ed3043b5dba34be7da83a, type: 3}
-  possibleTiles:
-  - {fileID: 2799466830775885007, guid: ca5544aa8f202364c8fe81eb517a93de, type: 3}
-  - {fileID: 8592683164815019212, guid: 0a44e618917b12248b4799150183a690, type: 3}
-  - {fileID: 5762192832635439373, guid: 27e3f258b95cf27418e2645a21da524f, type: 3}
-  - {fileID: 2445702082805259313, guid: c519a35ace5bd6143834e97ff2fb5275, type: 3}
-  - {fileID: 9053597347179475673, guid: 231883d5836cceb41af2941bb51ed5d5, type: 3}
-  - {fileID: 3592100868645384279, guid: 0aaa254feadda4c41bae8d0404c80180, type: 3}
   draggableLimit: 10
   spawnTransform: {fileID: 241496880625605251}
   conveyorSpeed: 2
@@ -129,6 +122,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ee2663bd0074855b51ba461d20e7ecf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  possibleTiles:
+  - {fileID: 2799466830775885007, guid: ca5544aa8f202364c8fe81eb517a93de, type: 3}
+  - {fileID: 8592683164815019212, guid: 0a44e618917b12248b4799150183a690, type: 3}
+  - {fileID: 5762192832635439373, guid: 27e3f258b95cf27418e2645a21da524f, type: 3}
+  - {fileID: 2445702082805259313, guid: c519a35ace5bd6143834e97ff2fb5275, type: 3}
+  - {fileID: 9053597347179475673, guid: 231883d5836cceb41af2941bb51ed5d5, type: 3}
+  - {fileID: 3592100868645384279, guid: 0aaa254feadda4c41bae8d0404c80180, type: 3}
+  possibleEnemyTiles:
+  - {fileID: 2799466830775885007, guid: ac9e6d8201ab4a249ad675f8cbd1f81e, type: 3}
+  - {fileID: 8592683164815019212, guid: 506eb49e47cdca149b09b76676b1f876, type: 3}
+  - {fileID: 5762192832635439373, guid: 424de8c21093ea742a3f0650110c6258, type: 3}
+  - {fileID: 2445702082805259313, guid: cbeee55d89be4ec4fb756683c0820c46, type: 3}
+  - {fileID: 9053597347179475673, guid: 3eae056f330ad184da9f4e085059d633, type: 3}
+  - {fileID: 3592100868645384279, guid: 8eef1d485e0b801409fbe9b8038e67b8, type: 3}
+  finalBossTile: {fileID: 8592683164815019212, guid: 75e703d0f53b79b45a0ca494fa870ec5, type: 3}
+  possibleEnemies:
+  - {fileID: 4213039829396648578, guid: 0d2e9ac5d66fe274985eaf43d67256f4, type: 3}
+  - {fileID: 1648106224102493794, guid: dfb1aec6e78044346b46698907572ce4, type: 3}
+  - {fileID: 8135870135295786549, guid: 9e31a2fca38fe2f43b345f030364d9a9, type: 3}
+  - {fileID: 3729613091193440415, guid: cab358943820d594995e14de4e0d964a, type: 3}
+  enemyFrequency: 0.3
 --- !u!1 &5635841659298276401
 GameObject:
   m_ObjectHideFlags: 0

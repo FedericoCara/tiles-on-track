@@ -9,7 +9,6 @@ public class ConveyorBelt : MonoBehaviour {
     [SerializeField] private float firstSpawnDelay = 2;
     [SerializeField] private float spawnDraggableFrequency = 2;
     [SerializeField] private DraggableTile draggableTilePrefab;
-    [SerializeField] private List<Tile> possibleTiles;
     [SerializeField] private int draggableLimit;
     [SerializeField] private Transform spawnTransform;
     [SerializeField] private float conveyorSpeed = 2;
@@ -20,6 +19,11 @@ public class ConveyorBelt : MonoBehaviour {
     private List<DraggableTile> _spawnedDraggables = new List<DraggableTile>();
     private List<Transform> _draggablePositions = new List<Transform>();
     private int _draggableCount;
+    private Player _player;
+
+    private void Awake() {
+        _player = FindObjectOfType<Player>();
+    }
 
     void Start() {
         StartCoroutine(SpawnDraggablesCoroutine());
@@ -52,7 +56,7 @@ public class ConveyorBelt : MonoBehaviour {
         yield return new WaitForSeconds(firstSpawnDelay);
         while (true) {
             if (_spawnedDraggables.Count < draggableLimit) {
-                SpawnDraggable(strategy.CalculateTile(possibleTiles));
+                SpawnDraggable(strategy.CalculateTile(_player.Level));
             }
 
             yield return new WaitForSeconds(spawnDraggableFrequency);

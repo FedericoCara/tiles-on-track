@@ -13,6 +13,7 @@ public class Player : MonoBehaviour, IPlayerEvents {
     public event Action<int, int> OnPlayerHealthChanged = (current, max) => { };
     
     private PlayerMovement _playerMovement;
+    public int Level => playerData.Level;
 
     private void Awake() {
         playerData.OnExperienceGained += experienceGained => OnExperienceGained(experienceGained);
