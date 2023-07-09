@@ -1,8 +1,9 @@
 {
-    "name": "Gameplay",
+    "name": "mimic-framework",
     "rootNamespace": "",
     "references": [
-        "GUID:3543559dadc84f3499c807c4c152d212"
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:3a049147affc53b47b15b7a3a125b47f"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

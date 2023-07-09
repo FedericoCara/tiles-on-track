@@ -13,15 +13,12 @@
         Down = down;
     }
 
-    public Tile GetCorrectConnection() {
-        if (Down != null && Down.FollowingTile == null &&
-            Down.NextTileDirection == TileDirection.UP)
+    public Tile GetCorrectConnection(TileDirection comingDirection) {
+        if (Down != null && Down.CanConnectWith(comingDirection, TileDirection.UP))
             return Down;
-        if (Left != null && Left.FollowingTile == null &&
-            Left.NextTileDirection == TileDirection.RIGHT)
+        if (Left != null && Left.CanConnectWith(comingDirection, TileDirection.RIGHT))
             return Left;
-        if (Up != null && Up.FollowingTile == null &&
-            Up.NextTileDirection == TileDirection.DOWN)
+        if (Up != null && Up.CanConnectWith(comingDirection, TileDirection.DOWN))
             return Up;
         return null;
     }

@@ -9,10 +9,15 @@ public class Tile : MonoBehaviour {
     [SerializeField] private LineRenderer lineRenderer;
     [SerializeField] private Tile followingTile;
     [SerializeField] private TileDisplay display;
+    [SerializeField] private TileDirection comingTileDirection;
     [SerializeField] private TileDirection nextTileDirection;
     private TilePoint[] points;
     public Tile FollowingTile => followingTile;
+    public TileDirection ComingTileDirection => comingTileDirection;
     public TileDirection NextTileDirection => nextTileDirection;
+
+    public bool IsReversable => comingTileDirection == TileDirection.UP && nextTileDirection == TileDirection.DOWN ||
+                              comingTileDirection == TileDirection.DOWN && nextTileDirection == TileDirection.UP;
     
     private void Start() {
         InitializePoints();
@@ -44,23 +49,43 @@ public class Tile : MonoBehaviour {
         }
     }
 
-    public GameObject MakeCorrectPreview() {
+    public GameObject MakeCorrectTilePreview() {
         var preview = Instantiate(this);
         preview.display.MakeCorrectPreview();
         return preview.gameObject;
     }
     
-    public GameObject MakeWrongPreview() {
+    public GameObject MakeWrongTilePreview() {
         var preview = Instantiate(this);
         preview.display.MakeWrongPreview();
         return preview.gameObject;
     }
+
+    public void MakeDraggablePreview(Transform previewParent, string sortLayerName) {
+        var preview = Instantiate(this, previewParent);
+        preview.display.DestroyBackgroundSprites();
+        preview.display.ChangeSortLayer(sortLayerName);
+        Destroy(preview);
+        Destroy(preview.GetComponentInChildren<Collider2D>());
+    }
+
+    public bool CanConnectWith(TileDirection otherTileEntryDirection, TileDirection otherTilePutDirection) =>
+        followingTile == null &&
+        (AreOpposite(NextTileDirection,otherTileEntryDirection) && NextTileDirection == otherTilePutDirection ||
+         IsReversable && AreOpposite(ComingTileDirection, otherTileEntryDirection) && ComingTileDirection == otherTilePutDirection);
+
+    private bool AreOpposite(TileDirection direction1, TileDirection direction2) =>
+        direction1 == TileDirection.UP && direction2 == TileDirection.DOWN ||
+        direction1 == TileDirection.DOWN && direction2 == TileDirection.UP ||
+        direction1 == TileDirection.LEFT && direction2 == TileDirection.RIGHT ||
+        direction1 == TileDirection.RIGHT && direction2 == TileDirection.LEFT;
 }
 
 public enum TileDirection {
     RIGHT,
     UP,
-    DOWN
+    DOWN,
+    LEFT
 }
 
 public class TilePoint {

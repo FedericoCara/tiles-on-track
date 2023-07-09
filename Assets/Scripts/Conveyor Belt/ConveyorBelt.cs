@@ -8,7 +8,8 @@ public class ConveyorBelt : MonoBehaviour {
     [SerializeField] private ConveyorTileStrategy strategy;
     [SerializeField] private float firstSpawnDelay = 2;
     [SerializeField] private float spawnDraggableFrequency = 2;
-    [SerializeField] private List<DraggableTile> possibleDraggables;
+    [SerializeField] private DraggableTile draggableTilePrefab;
+    [SerializeField] private List<Tile> possibleTiles;
     [SerializeField] private int draggableLimit;
     [SerializeField] private Transform spawnTransform;
     [SerializeField] private float conveyorSpeed = 2;
@@ -51,21 +52,22 @@ public class ConveyorBelt : MonoBehaviour {
         yield return new WaitForSeconds(firstSpawnDelay);
         while (true) {
             if (_spawnedDraggables.Count < draggableLimit) {
-                SpawnDraggable(strategy.CalculateDraggable(possibleDraggables));
+                SpawnDraggable(strategy.CalculateTile(possibleTiles));
             }
 
             yield return new WaitForSeconds(spawnDraggableFrequency);
         }
     }
 
-    private void SpawnDraggable(DraggableTile draggablePrefab) {
+    private void SpawnDraggable(Tile tilePrefab) {
         _draggableCount++;
-        var draggable = Instantiate(draggablePrefab, transform);
+        var draggable = Instantiate(draggableTilePrefab, transform);
         draggable.transform.position = spawnTransform.position;
         draggable.name = draggable.name.Replace("(Clone)",$"-{_draggableCount:000}");
         var draggablePosition = new GameObject($"Draggable-{_draggableCount:000}").transform;
         draggablePosition.position = spawnTransform.position;
         draggablePosition.parent = transform;
+        draggable.SetTilePrefab(tilePrefab);
         _spawnedDraggables.Add(draggable);
         _draggablePositions.Add(draggablePosition);
 

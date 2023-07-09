@@ -282,7 +282,8 @@ MonoBehaviour:
   lineRenderer: {fileID: 8644445607679120058}
   followingTile: {fileID: 0}
   display:
-    spriteRenderers:
+    mainSpriteRenderers: []
+    backgroundSpriteRenderers:
     - {fileID: 7769743681628110966}
     - {fileID: 1405580127328415470}
   nextTileDirection: 0

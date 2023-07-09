@@ -2,7 +2,7 @@
 using UnityEngine;
 
 public class ConveyorTileStrategy : MonoBehaviour {
-    public DraggableTile CalculateDraggable(List<DraggableTile> possibleDraggables) {
-        return possibleDraggables[Random.Range(0, possibleDraggables.Count - 1)];
+    public Tile CalculateTile(List<Tile> possibleTiles) {
+        return possibleTiles[Random.Range(0, possibleTiles.Count - 1)];
     }
 }

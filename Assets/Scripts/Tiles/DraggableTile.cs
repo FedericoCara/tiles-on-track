@@ -10,7 +10,9 @@ public class DraggableTile :MonoBehaviour {
     public event Action OnReturnToInitialPosition = () => {};
     public event Action OnTileDropped = () => {};
 
-    [SerializeField] private Tile tilePrefab;
+    [SerializeField] private Transform previewParent;
+    [SerializeField] private string previewSortLayerName = "Conveyor Belt";
+    private Tile tilePrefab;
     private Draggable _draggable;
     private SnapToGrid _snapToGrid;
     private GameObject _previousPreview;
@@ -29,16 +31,23 @@ public class DraggableTile :MonoBehaviour {
         };
     }
 
+    private void Start() {
+        previewParent.DestroyAllChildren();
+        tilePrefab.MakeDraggablePreview(previewParent, previewSortLayerName);
+    }
+
+    public void SetTilePrefab(Tile tile) => tilePrefab = tile;
+
     private void DrawTilePreview() {
         DestroyPreviousPreviewIfNecessary();
 
         var cell = _snapToGrid.GetCurrentCellPosition();
         var connections = _tileFinder.GetConnections(cell);
         if (connections.Center == null) {
-            if (connections.GetCorrectConnection()!=null) {
-                _previousPreview = tilePrefab.MakeCorrectPreview();
+            if (connections.GetCorrectConnection(tilePrefab.ComingTileDirection)!=null) {
+                _previousPreview = tilePrefab.MakeCorrectTilePreview();
             } else {
-                _previousPreview = tilePrefab.MakeWrongPreview();
+                _previousPreview = tilePrefab.MakeWrongTilePreview();
             }
         }
 
@@ -51,7 +60,7 @@ public class DraggableTile :MonoBehaviour {
 
         var cell = _snapToGrid.GetCurrentCellPosition();
         var connections = _tileFinder.GetConnections(cell);
-        var correctConnection = connections.GetCorrectConnection();
+        var correctConnection = connections.GetCorrectConnection(tilePrefab.ComingTileDirection);
         
         if (correctConnection!=null) {
             var grid = FindObjectOfType<Grid>();

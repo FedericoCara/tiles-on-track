@@ -76,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -321386185
   m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingOrder: -3
   m_Sprite: {fileID: 21300000, guid: 6ea537ea2b0d6fa49b340a96cd856611, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -103,8 +103,14 @@ MonoBehaviour:
   strategy: {fileID: 8425388893378442503}
   firstSpawnDelay: 2
   spawnDraggableFrequency: 5
-  possibleDraggables:
-  - {fileID: 4622785668256234448, guid: 4b8ddfcda68ed3043b5dba34be7da83a, type: 3}
+  draggableTilePrefab: {fileID: 4622785668256234448, guid: 4b8ddfcda68ed3043b5dba34be7da83a, type: 3}
+  possibleTiles:
+  - {fileID: 2799466830775885007, guid: ca5544aa8f202364c8fe81eb517a93de, type: 3}
+  - {fileID: 8592683164815019212, guid: 0a44e618917b12248b4799150183a690, type: 3}
+  - {fileID: 5762192832635439373, guid: 27e3f258b95cf27418e2645a21da524f, type: 3}
+  - {fileID: 2445702082805259313, guid: c519a35ace5bd6143834e97ff2fb5275, type: 3}
+  - {fileID: 9053597347179475673, guid: 231883d5836cceb41af2941bb51ed5d5, type: 3}
+  - {fileID: 3592100868645384279, guid: 0aaa254feadda4c41bae8d0404c80180, type: 3}
   draggableLimit: 6
   spawnTransform: {fileID: 241496880625605251}
   conveyorSpeed: 2

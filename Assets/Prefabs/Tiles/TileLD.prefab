@@ -97,11 +97,23 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1737615506023788419, guid: dacead7759b5d6742aebe05c933b4e66, type: 3}
+      propertyPath: comingTileDirection
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1737615506023788419, guid: dacead7759b5d6742aebe05c933b4e66, type: 3}
       propertyPath: display.spriteRenderers.Array.size
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1737615506023788419, guid: dacead7759b5d6742aebe05c933b4e66, type: 3}
       propertyPath: display.spriteRenderers.Array.data[2]
+      value: 
+      objectReference: {fileID: 3349615399211288193}
+    - target: {fileID: 1737615506023788419, guid: dacead7759b5d6742aebe05c933b4e66, type: 3}
+      propertyPath: display.mainSpriteRenderers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1737615506023788419, guid: dacead7759b5d6742aebe05c933b4e66, type: 3}
+      propertyPath: display.mainSpriteRenderers.Array.data[0]
       value: 
       objectReference: {fileID: 3349615399211288193}
     - target: {fileID: 3911798096097231685, guid: dacead7759b5d6742aebe05c933b4e66, type: 3}
