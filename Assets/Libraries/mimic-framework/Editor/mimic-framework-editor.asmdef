@@ -1,0 +1,18 @@
+{
+    "name": "mimic-framework-editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:3543559dadc84f3499c807c4c152d212"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
