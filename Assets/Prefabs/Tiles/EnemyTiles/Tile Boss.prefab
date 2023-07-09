@@ -102,7 +102,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1737615506023788419, guid: dacead7759b5d6742aebe05c933b4e66, type: 3}
       propertyPath: comingTileDirection
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1737615506023788419, guid: dacead7759b5d6742aebe05c933b4e66, type: 3}
       propertyPath: enemyData.enemyPrefab

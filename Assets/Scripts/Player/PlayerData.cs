@@ -33,10 +33,10 @@ public class PlayerData : IPlayerEvents{
     public void ReceiveDamage(int damage) {
         ValidateMaxHealth();
         health -= damage;
-        if (health <= 0)
+        if (health <= 0) {
             OnPlayerDied();
-        else
-            OnPlayerHealthChanged(Health, MaxHealth);
+        }else
+            NotifyHealthUpdated();
     }
 
     private void UpdateLevelIfNecessary() {
@@ -48,10 +48,21 @@ public class PlayerData : IPlayerEvents{
             experienceForNextLevel = CalculateExperienceForNextLevel();
             MaxHealth = CalculateHealthForNextLevel();
             playerAttack.Damage = CalculateDamageForNextLevel();
-            
+            RestoreHealth();
+
             OnLevelGained(level);
+            OnExperienceGained(new ExperienceGained(experience, experienceForNextLevel));
         }else
             OnExperienceGained(new ExperienceGained(experience, experienceForNextLevel));
+    }
+
+    private void RestoreHealth() {
+        health = MaxHealth;
+        NotifyHealthUpdated();
+    }
+
+    private void NotifyHealthUpdated() {
+        OnPlayerHealthChanged(Health, MaxHealth);
     }
 
     private void SetStartingRequiredExperienceIfNecessary() {

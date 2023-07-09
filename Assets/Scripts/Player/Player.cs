@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerMovement))]
@@ -20,9 +18,14 @@ public class Player : MonoBehaviour, IPlayerEvents {
     private void Awake() {
         playerData.OnExperienceGained += experienceGained => OnExperienceGained(experienceGained);
         playerData.OnLevelGained += newLevel => OnLevelGained(newLevel);
-        playerData.OnPlayerDied += () => OnPlayerDied();
+        playerData.OnPlayerDied += HandlePlayerDead;
         playerData.OnPlayerHealthChanged += (current,max) => OnPlayerHealthChanged(current, max);
         _playerMovement = GetComponent<PlayerMovement>();
+    }
+
+    private void HandlePlayerDead() {
+        Destroy(gameObject);
+        OnPlayerDied();
     }
 
     public void AddExperience(int exp) => playerData.AddExperience(exp);

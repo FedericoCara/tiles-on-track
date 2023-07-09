@@ -138,7 +138,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7542847695247728233, guid: fdaf5d51c5539684eaff425f06ead7a4, type: 3}
       propertyPath: m_Name
-      value: Skeleton Variant
+      value: Skeleton
+      objectReference: {fileID: 0}
+    - target: {fileID: 8944076706321122065, guid: fdaf5d51c5539684eaff425f06ead7a4, type: 3}
+      propertyPath: health
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8944076706321122065, guid: fdaf5d51c5539684eaff425f06ead7a4, type: 3}
+      propertyPath: frequencySeconds
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

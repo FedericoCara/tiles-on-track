@@ -146,7 +146,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8944076706321122065, guid: fdaf5d51c5539684eaff425f06ead7a4, type: 3}
       propertyPath: health
-      value: 15
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 8944076706321122065, guid: fdaf5d51c5539684eaff425f06ead7a4, type: 3}
       propertyPath: minPlayerLevel

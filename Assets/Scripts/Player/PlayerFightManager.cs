@@ -5,6 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(Player))]
 public class PlayerFightManager : MonoBehaviour {
 
+    public event Action OnBossDefeated = () => { };
+    public event Action OnPlayerDefeated = () => { };
+
     private PlayerAttack _playerAttack;
     private Player _player;
     private PlayerMovement _playerMovement;
@@ -31,8 +34,13 @@ public class PlayerFightManager : MonoBehaviour {
                 _playerPreparingAttack -= _playerAttack.FrequencySeconds;
                 if (_opponent.IsDead) {
                     _player.AddExperience(_opponent.ExperienceGiven);
-                    _playerMovement.SetFightFinished();
                     _fighting = false;
+                    if (_opponent.IsFinalBoss) {
+                        OnBossDefeated();
+                    } else {
+                        _playerMovement.SetFightFinished();
+                    }
+
                     return;
                 }
             }
@@ -42,6 +50,8 @@ public class PlayerFightManager : MonoBehaviour {
                 _opponentPreparingAttack -= _opponent.FrequencySeconds;
                 if (_player.IsDead) {
                     _fighting = false;
+                    Destroy(_player.gameObject);
+                    OnPlayerDefeated();
                 }
             }
         }
