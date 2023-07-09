@@ -176,6 +176,14 @@ PrefabInstance:
       propertyPath: m_Positions.Array.data[1].x
       value: 3.2
       objectReference: {fileID: 0}
+    - target: {fileID: 8644445607679120058, guid: dacead7759b5d6742aebe05c933b4e66, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.a
+      value: 0.039215688
+      objectReference: {fileID: 0}
+    - target: {fileID: 8644445607679120058, guid: dacead7759b5d6742aebe05c933b4e66, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.a
+      value: 0.039215688
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

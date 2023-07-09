@@ -139,7 +139,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: -876546973899608171, guid: c5b0c1a1883c09f4b8245bf009982e7f, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -157,9 +157,9 @@ LineRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingLayerID: 1717897073
+  m_SortingLayer: -1
+  m_SortingOrder: 0
   m_Positions: []
   m_Parameters:
     serializedVersion: 3
@@ -181,8 +181,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0, b: 0, a: 1}
-      key1: {r: 1, g: 0, b: 0, a: 1}
+      key0: {r: 1, g: 0, b: 0, a: 0}
+      key1: {r: 1, g: 0, b: 0, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -197,8 +197,8 @@ LineRenderer:
       ctime5: 0
       ctime6: 0
       ctime7: 0
-      atime0: 0
-      atime1: 65535
+      atime0: 386
+      atime1: 64957
       atime2: 0
       atime3: 0
       atime4: 0
@@ -265,7 +265,7 @@ Transform:
   - {fileID: 1473466378052267241}
   - {fileID: 1449923081946953920}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1737615506023788419
 MonoBehaviour:
@@ -286,7 +286,9 @@ MonoBehaviour:
     backgroundSpriteRenderers:
     - {fileID: 7769743681628110966}
     - {fileID: 1405580127328415470}
+  comingTileDirection: 0
   nextTileDirection: 0
+  enemyData: {fileID: 0}
 --- !u!61 &780663236079639877
 BoxCollider2D:
   m_ObjectHideFlags: 0

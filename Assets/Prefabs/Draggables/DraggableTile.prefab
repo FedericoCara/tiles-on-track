@@ -194,7 +194,7 @@ Transform:
   m_GameObject: {fileID: 6902140097673533910}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4.5, y: 4.5, z: 1}
+  m_LocalScale: {x: 2.7, y: 2.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3758618397536442712}
@@ -346,7 +346,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4.5, y: 4.5}
+  m_Size: {x: 2.7, y: 2.7}
   m_EdgeRadius: 0
 --- !u!114 &7232040664973170855
 MonoBehaviour:
@@ -372,7 +372,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c09fa6067cb479280061d3c77caa018, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilePrefab: {fileID: 2445702082805259313, guid: c519a35ace5bd6143834e97ff2fb5275, type: 3}
   previewParent: {fileID: 8700062791829982642}
   previewSortLayerName: Conveyor Belt
 --- !u!114 &4099180434269561768
@@ -412,7 +411,7 @@ Transform:
   m_GameObject: {fileID: 7347418505221698468}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_LocalScale: {x: 0.36, y: 0.36, z: 0.36}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2018993945082066146}

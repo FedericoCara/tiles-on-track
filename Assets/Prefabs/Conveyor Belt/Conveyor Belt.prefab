@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: -321386185
   m_SortingLayer: 2
   m_SortingOrder: -3
-  m_Sprite: {fileID: 21300000, guid: 6ea537ea2b0d6fa49b340a96cd856611, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 03cb7f84a9fcbf34e9d0a4d92b9b562f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   strategy: {fileID: 8425388893378442503}
-  firstSpawnDelay: 2
+  firstSpawnDelay: 1
   spawnDraggableFrequency: 3
   draggableTilePrefab: {fileID: 4622785668256234448, guid: 4b8ddfcda68ed3043b5dba34be7da83a, type: 3}
   possibleTiles:
@@ -111,12 +111,12 @@ MonoBehaviour:
   - {fileID: 2445702082805259313, guid: c519a35ace5bd6143834e97ff2fb5275, type: 3}
   - {fileID: 9053597347179475673, guid: 231883d5836cceb41af2941bb51ed5d5, type: 3}
   - {fileID: 3592100868645384279, guid: 0aaa254feadda4c41bae8d0404c80180, type: 3}
-  draggableLimit: 6
+  draggableLimit: 10
   spawnTransform: {fileID: 241496880625605251}
   conveyorSpeed: 2
   conveyorEndPoint: {fileID: 2099899371859169215}
   conveyorDirection: {x: 0, y: -1, z: 0}
-  draggableSize: 4.8
+  draggableSize: 2.88
 --- !u!114 &8425388893378442503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,7 +184,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5944795640292715950}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -12.3, z: 0}
+  m_LocalPosition: {x: 0, y: -13.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

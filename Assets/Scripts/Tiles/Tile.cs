@@ -11,6 +11,7 @@ public class Tile : MonoBehaviour {
     [SerializeField] private TileDisplay display;
     [SerializeField] private TileDirection comingTileDirection;
     [SerializeField] private TileDirection nextTileDirection;
+    [SerializeField] private EnemyData enemyData;
     private TilePoint[] points;
     public Tile FollowingTile => followingTile;
     public TileDirection ComingTileDirection => comingTileDirection;
@@ -120,4 +121,5 @@ public class TilePoint {
     public Vector2 point;
     public bool isLast;
     public bool isFirst;
+    public bool stopsForEnemy;
 }
