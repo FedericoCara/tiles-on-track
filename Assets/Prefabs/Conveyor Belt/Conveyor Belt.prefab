@@ -146,7 +146,7 @@ MonoBehaviour:
   - {fileID: 8135870135295786549, guid: 9e31a2fca38fe2f43b345f030364d9a9, type: 3}
   - {fileID: 3729613091193440415, guid: cab358943820d594995e14de4e0d964a, type: 3}
   enemyFrequency: 0.3
-  potionFrequency: 0.05
+  potionFrequency: 0.1
 --- !u!1 &5635841659298276401
 GameObject:
   m_ObjectHideFlags: 0

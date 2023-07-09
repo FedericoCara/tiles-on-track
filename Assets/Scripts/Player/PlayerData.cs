@@ -13,7 +13,14 @@ public class PlayerData : IPlayerEvents{
     
     [SerializeField] private int health;
     public int Health => health;
-    public int MaxHealth { get; private set; }
+    private int maxHealth;
+    public int MaxHealth {
+        get {
+            ValidateMaxHealth();
+            return maxHealth;
+        }
+        private set => maxHealth = value;
+    }
 
     [SerializeField] private int level;
     public int Level => level;
@@ -84,7 +91,7 @@ public class PlayerData : IPlayerEvents{
 
 
     private void ValidateMaxHealth() {
-        if (MaxHealth <= 0)
+        if (maxHealth <= 0)
             MaxHealth = health;
     }
 }

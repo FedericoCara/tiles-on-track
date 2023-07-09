@@ -18,16 +18,16 @@ public class ConveyorTileStrategy : MonoBehaviour {
     private float potionFrequencyAccumulated = 0;
     private bool finalBossDelivered = false;
 
-    public Tile CalculateTile(int playerLevel) {
+    public Tile CalculateTile(int playerLevel, float healthPercentage) {
         if (_tilesToGive.IsEmpty()) {
             _tilesToGive.AddRange(possibleTiles);
         }
 
-        return  ShouldGiveEnemy(playerLevel) ?? ShouldGivePotion() ??_tilesToGive.RemoveElementAtRandom();
+        return  ShouldGiveEnemy(playerLevel) ?? ShouldGivePotion(healthPercentage) ??_tilesToGive.RemoveElementAtRandom();
     }
 
-    private Tile ShouldGivePotion() {
-        potionFrequencyAccumulated += potionFrequency;
+    private Tile ShouldGivePotion(float healthPercentage) {
+        potionFrequencyAccumulated += potionFrequency * (2-healthPercentage);
         if (Random.value < potionFrequencyAccumulated) {
             potionFrequencyAccumulated = 0;
             if(_potionTilesToGive.IsEmpty())

@@ -141,8 +141,16 @@ PrefabInstance:
       value: Skeleton
       objectReference: {fileID: 0}
     - target: {fileID: 8944076706321122065, guid: fdaf5d51c5539684eaff425f06ead7a4, type: 3}
+      propertyPath: damage
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8944076706321122065, guid: fdaf5d51c5539684eaff425f06ead7a4, type: 3}
       propertyPath: health
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8944076706321122065, guid: fdaf5d51c5539684eaff425f06ead7a4, type: 3}
+      propertyPath: experienceGiven
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8944076706321122065, guid: fdaf5d51c5539684eaff425f06ead7a4, type: 3}
       propertyPath: frequencySeconds

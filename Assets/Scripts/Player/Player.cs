@@ -14,6 +14,7 @@ public class Player : MonoBehaviour, IPlayerEvents {
     public int Level => playerData.Level;
     public PlayerAttack PlayerAttack => playerData.PlayerAttack;
     public bool IsDead => playerData.Health<=0;
+    public float HealthPercentage => playerData.Health / (float) playerData.MaxHealth;
 
     private void Awake() {
         playerData.OnExperienceGained += experienceGained => OnExperienceGained(experienceGained);

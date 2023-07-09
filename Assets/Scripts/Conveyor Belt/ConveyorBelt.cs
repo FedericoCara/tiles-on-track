@@ -56,7 +56,7 @@ public class ConveyorBelt : MonoBehaviour {
         yield return new WaitForSeconds(firstSpawnDelay);
         while (true) {
             if (_spawnedDraggables.Count < draggableLimit) {
-                SpawnDraggable(strategy.CalculateTile(_player.Level));
+                SpawnDraggable(strategy.CalculateTile(_player.Level, _player.HealthPercentage));
             }
 
             yield return new WaitForSeconds(spawnDraggableFrequency);
