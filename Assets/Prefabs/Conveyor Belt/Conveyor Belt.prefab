@@ -123,7 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   possibleTiles:
-  - {fileID: 2799466830775885007, guid: ca5544aa8f202364c8fe81eb517a93de, type: 3}
+  - {fileID: 2799466830775885007, guid: 405d575410b7f8a43a0646fc963058d2, type: 3}
   - {fileID: 8592683164815019212, guid: 0a44e618917b12248b4799150183a690, type: 3}
   - {fileID: 5762192832635439373, guid: 27e3f258b95cf27418e2645a21da524f, type: 3}
   - {fileID: 2445702082805259313, guid: c519a35ace5bd6143834e97ff2fb5275, type: 3}
