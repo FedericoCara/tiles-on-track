@@ -31,26 +31,18 @@ public class TileDisplay2D : TileDisplayBase {
         display2D.ChangeSortLayer(previewSortLayer);
         if (previewTileComponent.HasEnemy) {
             SpawnEnemyPreviewIfNecessary(previewTileComponent);
-            previewTileComponent.EnemyInTile.EnemyDisplay.ChangeSortLayer(previewSortLayer);
+            var enemyDisplay2D = previewTileComponent.EnemyInTile.EnemyDisplay as EnemyDisplay2D;
+            enemyDisplay2D.ChangeSortLayer(previewSortLayer);
         }else if (previewTileComponent.HasPotion) {
             previewTileComponent.PotionInTile.ChangeSortLayer(previewSortLayer);
-            GameObject.Destroy(previewTileComponent.PotionInTile.Potion);
+            Destroy(previewTileComponent.PotionInTile.Potion);
         }
 
-        GameObject.Destroy(previewTileComponent);
-        GameObject.Destroy(previewTileComponent.GetComponentInChildren<Collider2D>());
+        Destroy(previewTileComponent);
+        Destroy(previewTileComponent.GetComponentInChildren<Collider2D>());
     }
 
 
-    private void SpawnEnemyPreviewIfNecessary(Tile previewTileComponent) {
-        if (previewTileComponent.HasEnemy) {
-            var enemyInTile = previewTileComponent.EnemyInTile;
-            var enemyPosition = previewTileComponent.GetNextPointPosition(enemyInTile.EnemyPointIndex);
-            var enemyPreviewComponent =  enemyInTile.EnemyDisplay.SpawnEnemyPreview(enemyInTile.EnemyPrefab, enemyPosition, previewTileComponent.transform);
-            GameObject.Destroy(enemyPreviewComponent);
-        }
-    }
-    
     public override void MakeCorrectPreview() {
         foreach (var spriteRenderer in mainSpriteRenderers) {
             spriteRenderer.color = spriteRenderer.color.GetColorWithAlpha(0.5f);
@@ -69,14 +61,6 @@ public class TileDisplay2D : TileDisplayBase {
         }
     }
 
-    public override void DestroyBackgroundSprites() {
-        foreach (var spriteRenderer in backgroundSpriteRenderers) {
-            if (spriteRenderer != null && spriteRenderer.gameObject != null)
-                GameObject.Destroy(spriteRenderer.gameObject);
-        }
-        backgroundSpriteRenderers.Clear();
-    }
-
     public void ChangeSortLayer(string sortLayerName) {
         foreach (var spriteRenderer in mainSpriteRenderers) {
             spriteRenderer.sortingLayerName = sortLayerName;
@@ -84,5 +68,22 @@ public class TileDisplay2D : TileDisplayBase {
         foreach (var spriteRenderer in backgroundSpriteRenderers) {
             spriteRenderer.sortingLayerName = sortLayerName;
         }
+    }
+
+    private void SpawnEnemyPreviewIfNecessary(Tile previewTileComponent) {
+        if (previewTileComponent.HasEnemy) {
+            var enemyInTile = previewTileComponent.EnemyInTile;
+            var enemyPosition = previewTileComponent.GetNextPointPosition(enemyInTile.EnemyPointIndex);
+            var enemyPreviewComponent =  enemyInTile.EnemyDisplay.SpawnEnemyPreview(enemyInTile.EnemyPrefab, enemyPosition, previewTileComponent.transform);
+            Destroy(enemyPreviewComponent);
+        }
+    }
+
+    private void DestroyBackgroundSprites() {
+        foreach (var spriteRenderer in backgroundSpriteRenderers) {
+            if (spriteRenderer != null && spriteRenderer.gameObject != null)
+                Destroy(spriteRenderer.gameObject);
+        }
+        backgroundSpriteRenderers.Clear();
     }
 }

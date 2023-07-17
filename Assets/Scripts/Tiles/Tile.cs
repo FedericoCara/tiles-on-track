@@ -103,7 +103,6 @@ public class Tile : MonoBehaviour {
     public Enemy SpawnEnemy() {
         _enemy = Instantiate(enemyInTile.EnemyPrefab, transform);
         _enemy.transform.position = Points[enemyInTile.EnemyPointIndex].point;
-        enemyInTile.EnemyDisplay.SetEnemy(_enemy);
         _enemy.EnemyFightDisplay.Hide();
         return _enemy;
     }

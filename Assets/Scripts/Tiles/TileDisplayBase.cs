@@ -6,5 +6,4 @@ public abstract class TileDisplayBase : MonoBehaviour {
     public abstract void MakeDraggablePreview(Transform previewParent);
     public abstract void MakeCorrectPreview();
     public abstract void MakeWrongPreview();
-    public abstract void DestroyBackgroundSprites();
 }

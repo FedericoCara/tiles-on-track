@@ -279,8 +279,6 @@ MonoBehaviour:
   enemyPointIndex: 2
   playerPointIndex: 1
   enemyPrefab: {fileID: 0}
-  enemyDisplay:
-    mainSpriteRenderers: []
 --- !u!4 &6048590956136226335 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3911798096097231685, guid: dacead7759b5d6742aebe05c933b4e66, type: 3}

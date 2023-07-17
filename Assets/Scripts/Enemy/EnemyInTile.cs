@@ -9,7 +9,6 @@ public class EnemyInTile : MonoBehaviour{
     public int PlayerPointIndex => playerPointIndex;
     [SerializeField] private Enemy enemyPrefab;
     public Enemy EnemyPrefab => enemyPrefab;
-    [SerializeField] private EnemyDisplay enemyDisplay;
-    public EnemyDisplay EnemyDisplay => enemyDisplay;
+    public EnemyDisplayBase EnemyDisplay => enemyPrefab.EnemyDisplay;
     public void SetEnemy(Enemy enemy) => enemyPrefab = enemy;
 }

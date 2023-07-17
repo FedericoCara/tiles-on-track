@@ -276,5 +276,3 @@ MonoBehaviour:
   enemyPointIndex: 2
   playerPointIndex: 1
   enemyPrefab: {fileID: 0}
-  enemyDisplay:
-    mainSpriteRenderers: []

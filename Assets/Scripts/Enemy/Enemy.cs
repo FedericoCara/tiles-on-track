@@ -16,6 +16,9 @@ public class Enemy : MonoBehaviour {
     public bool IsFinalBoss => isFinalBoss;
     public bool IsDead => health <= 0;
 
+    [SerializeField] private EnemyDisplayBase enemyDisplay;
+    public EnemyDisplayBase EnemyDisplay => enemyDisplay;  
+
     [SerializeField] private EnemyFightDisplay fightDisplay;
     public EnemyFightDisplay EnemyFightDisplay => fightDisplay;
     private int _maxHealth;
