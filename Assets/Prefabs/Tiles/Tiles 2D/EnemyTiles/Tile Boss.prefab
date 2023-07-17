@@ -109,11 +109,23 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3729613091193440415, guid: cab358943820d594995e14de4e0d964a, type: 3}
     - target: {fileID: 1737615506023788419, guid: dacead7759b5d6742aebe05c933b4e66, type: 3}
+      propertyPath: enemyInTile.enemyPrefab
+      value: 
+      objectReference: {fileID: 3729613091193440415, guid: cab358943820d594995e14de4e0d964a, type: 3}
+    - target: {fileID: 1737615506023788419, guid: dacead7759b5d6742aebe05c933b4e66, type: 3}
       propertyPath: enemyData.enemyPointIndex
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1737615506023788419, guid: dacead7759b5d6742aebe05c933b4e66, type: 3}
       propertyPath: enemyData.playerPointIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1737615506023788419, guid: dacead7759b5d6742aebe05c933b4e66, type: 3}
+      propertyPath: enemyInTile.enemyPointIndex
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1737615506023788419, guid: dacead7759b5d6742aebe05c933b4e66, type: 3}
+      propertyPath: enemyInTile.playerPointIndex
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1737615506023788419, guid: dacead7759b5d6742aebe05c933b4e66, type: 3}

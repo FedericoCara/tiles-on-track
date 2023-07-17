@@ -113,6 +113,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1737615506023788419, guid: dacead7759b5d6742aebe05c933b4e66, type: 3}
+      propertyPath: enemyInTile.enemyPointIndex
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1737615506023788419, guid: dacead7759b5d6742aebe05c933b4e66, type: 3}
+      propertyPath: enemyInTile.playerPointIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1737615506023788419, guid: dacead7759b5d6742aebe05c933b4e66, type: 3}
       propertyPath: display.spriteRenderers.Array.size
       value: 3
       objectReference: {fileID: 0}

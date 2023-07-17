@@ -13,7 +13,7 @@ public class Tile : MonoBehaviour {
     [SerializeField] private TileDirection comingTileDirection;
     [SerializeField] private TileDirection nextTileDirection;
     [SerializeField] private bool hasEnemy = false;
-    [SerializeField] private EnemyInTile enemyData;
+    [SerializeField] private EnemyInTile enemyInTile;
     [SerializeField] private PotionInTile potionInTile;
 
     private TilePoint[] points;
@@ -30,6 +30,9 @@ public class Tile : MonoBehaviour {
     public TileDirection ComingTileDirection => comingTileDirection;
     public TileDirection NextTileDirection => nextTileDirection;
     public bool HasEnemy => hasEnemy;
+    public TileDisplay Display => display;
+    public EnemyInTile EnemyInTile => enemyInTile;
+    public PotionInTile PotionInTile => potionInTile;
 
     public bool IsNextTileInReverse => FollowingTile != null &&
                                        (FollowingTile.IsReversable &&
@@ -71,7 +74,7 @@ public class Tile : MonoBehaviour {
                 point = lineRenderer.transform.TransformPoint(lineRenderer.GetPosition(i)),
                 isLast = i == lineRenderer.positionCount - 1,
                 isFirst = i == 0,
-                stopsForEnemy = hasEnemy && i == enemyData.PlayerPointIndex,
+                stopsForEnemy = hasEnemy && i == enemyInTile.PlayerPointIndex,
                 stopsForPotion = HasPotion && i == potionInTile.PlayerPointIndex
             };
         }
@@ -96,48 +99,10 @@ public class Tile : MonoBehaviour {
             Debug.LogError("Following tile already set");
     }
 
-    public GameObject MakeCorrectTilePreview() {
-        var preview = Instantiate(this);
-        preview.display.MakeCorrectPreview();
-        SpawnEnemyPreviewIfNecessary(preview);
-        return preview.gameObject;
-    }
-
-    public GameObject MakeWrongTilePreview() {
-        var preview = Instantiate(this);
-        preview.display.MakeWrongPreview();
-        SpawnEnemyPreviewIfNecessary(preview);
-        return preview.gameObject;
-    }
-
-    public void MakeDraggablePreview(Transform previewParent, string sortLayerName) {
-        var previewTileComponent = Instantiate(this, previewParent);
-        previewTileComponent.display.DestroyBackgroundSprites();
-        previewTileComponent.display.ChangeSortLayer(sortLayerName);
-        if (previewTileComponent.hasEnemy) {
-            SpawnEnemyPreviewIfNecessary(previewTileComponent);
-            previewTileComponent.enemyData.EnemyDisplay.ChangeSortLayer(sortLayerName);
-        }else if (previewTileComponent.HasPotion) {
-            previewTileComponent.potionInTile.ChangeSortLayer(sortLayerName);
-            Destroy(previewTileComponent.potionInTile.Potion);
-        }
-
-        Destroy(previewTileComponent);
-        Destroy(previewTileComponent.GetComponentInChildren<Collider2D>());
-    }
-
-
-    private void SpawnEnemyPreviewIfNecessary(Tile previewTileComponent) {
-        if (previewTileComponent.hasEnemy) {
-            var enemyPreviewComponent = previewTileComponent.SpawnEnemy();
-            Destroy(enemyPreviewComponent);
-        }
-    }
-
     public Enemy SpawnEnemy() {
-        _enemy = Instantiate(enemyData.EnemyPrefab, transform);
-        _enemy.transform.position = Points[enemyData.EnemyPointIndex].point;
-        enemyData.EnemyDisplay.SetEnemy(_enemy);
+        _enemy = Instantiate(enemyInTile.EnemyPrefab, transform);
+        _enemy.transform.position = Points[enemyInTile.EnemyPointIndex].point;
+        enemyInTile.EnemyDisplay.SetEnemy(_enemy);
         _enemy.EnemyFightDisplay.Hide();
         return _enemy;
     }
@@ -150,7 +115,7 @@ public class Tile : MonoBehaviour {
          IsReversable && otherTileIsReversable && ComingTileDirection == otherTileEntryDirection && ComingTileDirection == otherTilePutDirection);
 
     public void SetEnemy(Enemy enemy) {
-        enemyData.SetEnemy(enemy);
+        enemyInTile.SetEnemy(enemy);
     }
 
     private bool AreOpposite(TileDirection direction1, TileDirection direction2) =>

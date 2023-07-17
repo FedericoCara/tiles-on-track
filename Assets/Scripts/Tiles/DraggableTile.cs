@@ -33,7 +33,7 @@ public class DraggableTile :MonoBehaviour {
 
     private void Start() {
         previewParent.DestroyAllChildren();
-        tilePrefab.MakeDraggablePreview(previewParent, previewSortLayerName);
+        tilePrefab.Display.MakeDraggablePreview(previewParent, previewSortLayerName);
     }
 
     public void SetTilePrefab(Tile tile) => tilePrefab = tile;
@@ -45,9 +45,9 @@ public class DraggableTile :MonoBehaviour {
         var connections = _tileFinder.GetConnections(cell);
         if (connections.Center == null) {
             if (connections.GetCorrectConnection(tilePrefab.ComingTileDirection, tilePrefab.IsReversable)!=null) {
-                _previousPreview = tilePrefab.MakeCorrectTilePreview();
+                _previousPreview = tilePrefab.Display.MakeCorrectTilePreview();
             } else {
-                _previousPreview = tilePrefab.MakeWrongTilePreview();
+                _previousPreview = tilePrefab.Display.MakeWrongTilePreview();
             }
         }
 

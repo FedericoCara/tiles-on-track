@@ -286,15 +286,19 @@ MonoBehaviour:
     backgroundSpriteRenderers:
     - {fileID: 7769743681628110966}
     - {fileID: 1405580127328415470}
+    tile: {fileID: 1737615506023788419}
   comingTileDirection: 0
   nextTileDirection: 0
   hasEnemy: 0
-  enemyData:
+  enemyInTile:
     enemyPointIndex: -1
     playerPointIndex: -1
     enemyPrefab: {fileID: 0}
     enemyDisplay:
       mainSpriteRenderers: []
+  potionInTile:
+    playerPointIndex: -1
+    potion: {fileID: 0}
 --- !u!61 &780663236079639877
 BoxCollider2D:
   m_ObjectHideFlags: 0
