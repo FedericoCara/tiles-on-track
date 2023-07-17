@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [Serializable]
-public class PotionInTile {
+public class PotionInTile : MonoBehaviour {
     
     [SerializeField] private int playerPointIndex = -1;
     public int PlayerPointIndex => playerPointIndex;

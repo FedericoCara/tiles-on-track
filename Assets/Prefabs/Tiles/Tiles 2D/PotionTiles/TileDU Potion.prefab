@@ -97,6 +97,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4854890402132639508}
     - target: {fileID: 1737615506023788419, guid: dacead7759b5d6742aebe05c933b4e66, type: 3}
+      propertyPath: potionInTile
+      value: 
+      objectReference: {fileID: -8047576567520875287}
+    - target: {fileID: 1737615506023788419, guid: dacead7759b5d6742aebe05c933b4e66, type: 3}
       propertyPath: nextTileDirection
       value: 1
       objectReference: {fileID: 0}
@@ -217,8 +221,30 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3911798096097231685, guid: dacead7759b5d6742aebe05c933b4e66, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3957643751038215662}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5445402138314285711, guid: dacead7759b5d6742aebe05c933b4e66, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -8047576567520875287}
   m_SourcePrefab: {fileID: 100100000, guid: dacead7759b5d6742aebe05c933b4e66, type: 3}
+--- !u!1 &2644707766750757312 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5445402138314285711, guid: dacead7759b5d6742aebe05c933b4e66, type: 3}
+  m_PrefabInstance: {fileID: 8007989300853826383}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-8047576567520875287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2644707766750757312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 519d2d18bb1d448b971f65bfcab4e40a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerPointIndex: 1
+  potion: {fileID: 4854890402132639508}
 --- !u!4 &6443358538309410826 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3911798096097231685, guid: dacead7759b5d6742aebe05c933b4e66, type: 3}
