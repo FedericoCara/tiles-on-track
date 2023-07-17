@@ -52,7 +52,7 @@ public class Tile : MonoBehaviour {
 
     public bool IsReversable => comingTileDirection == TileDirection.UP && nextTileDirection == TileDirection.DOWN ||
                                 comingTileDirection == TileDirection.DOWN && nextTileDirection == TileDirection.UP;
-    public bool HasPotion => potionInTile.Potion != null;
+    public bool HasPotion => potionInTile != null;
 
     public Enemy Enemy => _enemy;
     public Potion Potion => potionInTile.Potion;

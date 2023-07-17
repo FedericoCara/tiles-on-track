@@ -99,7 +99,7 @@ PrefabInstance:
     - target: {fileID: 1737615506023788419, guid: dacead7759b5d6742aebe05c933b4e66, type: 3}
       propertyPath: potionInTile
       value: 
-      objectReference: {fileID: -8047576567520875287, guid: db9c9009724b4404081899f0901fc5b2, type: 3}
+      objectReference: {fileID: 4394912861268621631}
     - target: {fileID: 1737615506023788419, guid: dacead7759b5d6742aebe05c933b4e66, type: 3}
       propertyPath: comingTileDirection
       value: 3
