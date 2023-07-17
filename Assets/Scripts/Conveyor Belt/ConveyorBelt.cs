@@ -63,7 +63,8 @@ public class ConveyorBelt : MonoBehaviour {
         }
     }
 
-    private void SpawnDraggable(Tile tilePrefab) {
+    private void SpawnDraggable(TileSpawnData tileSpawnData) {
+        Tile tilePrefab = tileSpawnData.Tile;
         _draggableCount++;
         var draggable = Instantiate(draggableTilePrefab, transform);
         draggable.transform.position = spawnTransform.position;
@@ -72,6 +73,8 @@ public class ConveyorBelt : MonoBehaviour {
         draggablePosition.position = spawnTransform.position;
         draggablePosition.parent = transform;
         draggable.SetTilePrefab(tilePrefab);
+        if (tileSpawnData.Enemy != null)
+            draggable.SetEnemyPrefab(tileSpawnData.Enemy);
         _spawnedDraggables.Add(draggable);
         _draggablePositions.Add(draggablePosition);
 

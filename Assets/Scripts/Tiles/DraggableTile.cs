@@ -12,6 +12,7 @@ public class DraggableTile :MonoBehaviour {
 
     [SerializeField] private Transform previewParent;
     private Tile tilePrefab;
+    private Enemy enemyPrefab;
     private Draggable _draggable;
     private SnapToGrid _snapToGrid;
     private GameObject _previousPreview;
@@ -32,10 +33,12 @@ public class DraggableTile :MonoBehaviour {
 
     private void Start() {
         previewParent.DestroyAllChildren();
-        tilePrefab.Display.MakeDraggablePreview(previewParent);
+        tilePrefab.Display.MakeDraggablePreview(previewParent, enemyPrefab);
     }
 
     public void SetTilePrefab(Tile tile) => tilePrefab = tile;
+
+    public void SetEnemyPrefab(Enemy enemy) => enemyPrefab = enemy;
 
     private void DrawTilePreview() {
         DestroyPreviousPreviewIfNecessary();
@@ -44,9 +47,9 @@ public class DraggableTile :MonoBehaviour {
         var connections = _tileFinder.GetConnections(cell);
         if (connections.Center == null) {
             if (connections.GetCorrectConnection(tilePrefab.ComingTileDirection, tilePrefab.IsReversable)!=null) {
-                _previousPreview = tilePrefab.Display.MakeCorrectTilePreview();
+                _previousPreview = tilePrefab.Display.MakeCorrectTilePreview(enemyPrefab);
             } else {
-                _previousPreview = tilePrefab.Display.MakeWrongTilePreview();
+                _previousPreview = tilePrefab.Display.MakeWrongTilePreview(enemyPrefab);
             }
         }
 
@@ -66,8 +69,10 @@ public class DraggableTile :MonoBehaviour {
             Tile newTile = Instantiate(tilePrefab, grid.transform);
             newTile.transform.position = _snapToGrid.GetCurrentSnappingPosition();
             correctConnection.SetFollowingTile(newTile);
-            if(newTile.HasEnemy)
-                newTile.SpawnEnemy();
+            if (newTile.HasEnemy) {
+                newTile.SpawnEnemy(enemyPrefab);
+            }
+                
             Destroy(gameObject);
             OnTileDropped();
         } else {

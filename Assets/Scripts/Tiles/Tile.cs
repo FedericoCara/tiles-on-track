@@ -100,11 +100,10 @@ public class Tile : MonoBehaviour {
             Debug.LogError("Following tile already set");
     }
 
-    public Enemy SpawnEnemy() {
-        _enemy = Instantiate(enemyInTile.EnemyPrefab, transform);
+    public void SpawnEnemy(Enemy enemyPrefab) {
+        _enemy = Instantiate(enemyPrefab, transform);
         _enemy.transform.position = Points[enemyInTile.EnemyPointIndex].point;
         _enemy.EnemyFightDisplay.Hide();
-        return _enemy;
     }
 
     public bool CanConnectWith(TileDirection otherTileEntryDirection, TileDirection otherTilePutDirection, bool otherTileIsReversable) =>
@@ -113,10 +112,6 @@ public class Tile : MonoBehaviour {
          IsReversable && AreOpposite(ComingTileDirection, otherTileEntryDirection) && ComingTileDirection == otherTilePutDirection ||
          otherTileIsReversable && NextTileDirection == otherTileEntryDirection && NextTileDirection == otherTilePutDirection ||
          IsReversable && otherTileIsReversable && ComingTileDirection == otherTileEntryDirection && ComingTileDirection == otherTilePutDirection);
-
-    public void SetEnemy(Enemy enemy) {
-        enemyInTile.SetEnemy(enemy);
-    }
 
     private bool AreOpposite(TileDirection direction1, TileDirection direction2) =>
         direction1 == TileDirection.UP && direction2 == TileDirection.DOWN ||

@@ -8,6 +8,7 @@ public class ConveyorTileStrategy : MonoBehaviour {
     [SerializeField] private List<Tile> possibleEnemyTiles;
     [SerializeField] private List<Tile> possiblePotionTiles;
     [SerializeField] private Tile finalBossTile;
+    [SerializeField] private Enemy finalBoss;
     [SerializeField] private List<Enemy> possibleEnemies;
     [SerializeField] private float enemyFrequency = 0.3f;
     [SerializeField] private float potionFrequency = 0.1f;
@@ -18,28 +19,38 @@ public class ConveyorTileStrategy : MonoBehaviour {
     private float potionFrequencyAccumulated = 0;
     private bool finalBossDelivered = false;
 
-    public Tile CalculateTile(int playerLevel, float healthPercentage) {
+    public TileSpawnData CalculateTile(int playerLevel, float healthPercentage) {
         if (_tilesToGive.IsEmpty()) {
             _tilesToGive.AddRange(possibleTiles);
         }
 
-        return  ShouldGivePotion(healthPercentage) ?? ShouldGiveEnemy(playerLevel) ?? _tilesToGive.RemoveElementAtRandom();
+        var potionTile = ShouldGivePotion(healthPercentage);
+        if (!potionTile.IsEmpty)
+            return potionTile;
+
+        var enemyTile = ShouldGiveEnemy(playerLevel);
+        if (!enemyTile.IsEmpty)
+            return enemyTile;
+
+        return GiveNeutralTile();
     }
 
-    private Tile ShouldGivePotion(float healthPercentage) {
+    private TileSpawnData GiveNeutralTile() => new TileSpawnData(_tilesToGive.RemoveElementAtRandom());
+
+    private TileSpawnData ShouldGivePotion(float healthPercentage) {
         potionFrequencyAccumulated += potionFrequency * (2-healthPercentage);
         if (Random.value < potionFrequencyAccumulated) {
             potionFrequencyAccumulated = 0;
             if(_potionTilesToGive.IsEmpty())
                 _potionTilesToGive.AddRange(possiblePotionTiles);
 
-            return _potionTilesToGive.RemoveElementAtRandom();
+            return new TileSpawnData(_potionTilesToGive.RemoveElementAtRandom());
         }
 
-        return null;
+        return TileSpawnData.Empty();
     }
 
-    private Tile ShouldGiveEnemy(int playerLevel) {
+    private TileSpawnData ShouldGiveEnemy(int playerLevel) {
         enemyFrequencyAccumulated += enemyFrequency;
         if (Random.value < enemyFrequencyAccumulated) {
             enemyFrequencyAccumulated = 0;
@@ -49,15 +60,14 @@ public class ConveyorTileStrategy : MonoBehaviour {
             
             if (enemy.IsFinalBoss) {
                 finalBossDelivered = true;
-                return finalBossTile;
+                return new TileSpawnData(finalBossTile, finalBoss);
             }
 
-            var enemyTile = _enemyTilesToGive.RemoveElementAtRandom();
-            enemyTile.SetEnemy(enemy);
-            return enemyTile;
+            var enemyTilePrefab = _enemyTilesToGive.RemoveElementAtRandom();
+            return new TileSpawnData(enemyTilePrefab, enemy);
         }
 
-        return null;
+        return TileSpawnData.Empty();
     }
 
     private Enemy GetEnemy(int playerLevel) {

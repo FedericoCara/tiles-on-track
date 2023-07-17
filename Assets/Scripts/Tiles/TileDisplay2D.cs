@@ -10,27 +10,27 @@ public class TileDisplay2D : TileDisplayBase {
     [SerializeField] private Tile tile;
     [SerializeField] private string previewSortLayer = "Conveyor Belt";
 
-    public override GameObject MakeCorrectTilePreview() {
+    public override GameObject MakeCorrectTilePreview(Enemy enemyPrefab) {
         var preview = GameObject.Instantiate(tile);
         preview.Display.MakeCorrectPreview();
-        SpawnEnemyPreviewIfNecessary(preview);
+        SpawnEnemyPreviewIfNecessary(preview, enemyPrefab);
         return preview.gameObject;
     }
 
-    public override GameObject MakeWrongTilePreview() {
+    public override GameObject MakeWrongTilePreview(Enemy enemyPrefab) {
         var preview = GameObject.Instantiate(tile);
         preview.Display.MakeWrongPreview();
-        SpawnEnemyPreviewIfNecessary(preview);
+        SpawnEnemyPreviewIfNecessary(preview, enemyPrefab);
         return preview.gameObject;
     }
 
-    public override void MakeDraggablePreview(Transform previewParent) {
+    public override void MakeDraggablePreview(Transform previewParent, Enemy enemyPrefab) {
         var previewTileComponent = GameObject.Instantiate(tile, previewParent);
         var display2D = previewTileComponent.Display as TileDisplay2D;
         display2D.DestroyBackgroundSprites();
         display2D.ChangeSortLayer(previewSortLayer);
         if (previewTileComponent.HasEnemy) {
-            SpawnEnemyPreviewIfNecessary(previewTileComponent);
+            SpawnEnemyPreviewIfNecessary(previewTileComponent, enemyPrefab);
             var enemyDisplay2D = previewTileComponent.EnemyInTile.EnemyDisplay as EnemyDisplay2D;
             enemyDisplay2D.ChangeSortLayer(previewSortLayer);
         }else if (previewTileComponent.HasPotion) {
@@ -70,11 +70,12 @@ public class TileDisplay2D : TileDisplayBase {
         }
     }
 
-    private void SpawnEnemyPreviewIfNecessary(Tile previewTileComponent) {
+    private void SpawnEnemyPreviewIfNecessary(Tile previewTileComponent, Enemy enemyPrefab) {
         if (previewTileComponent.HasEnemy) {
             var enemyInTile = previewTileComponent.EnemyInTile;
+            enemyInTile.SetEnemy(enemyPrefab);
             var enemyPosition = previewTileComponent.GetNextPointPosition(enemyInTile.EnemyPointIndex);
-            var enemyPreviewComponent =  enemyInTile.EnemyDisplay.SpawnEnemyPreview(enemyInTile.EnemyPrefab, enemyPosition, previewTileComponent.transform);
+            var enemyPreviewComponent =  enemyInTile.EnemyDisplay.SpawnEnemyPreview(enemyPrefab, enemyPosition, previewTileComponent.transform);
             Destroy(enemyPreviewComponent);
         }
     }

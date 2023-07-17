@@ -34,7 +34,7 @@ Transform:
   - {fileID: 241496880625605251}
   - {fileID: 2099899371859169215}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4248464564599346239
 SpriteRenderer:
@@ -140,6 +140,7 @@ MonoBehaviour:
   - {fileID: 8592683164815019212, guid: db9c9009724b4404081899f0901fc5b2, type: 3}
   - {fileID: 2445702082805259313, guid: 8a364ff13857d3148878bdeb3f34adc1, type: 3}
   finalBossTile: {fileID: 8592683164815019212, guid: 75e703d0f53b79b45a0ca494fa870ec5, type: 3}
+  finalBoss: {fileID: 3729613091193440415, guid: cab358943820d594995e14de4e0d964a, type: 3}
   possibleEnemies:
   - {fileID: 4213039829396648578, guid: 0d2e9ac5d66fe274985eaf43d67256f4, type: 3}
   - {fileID: 1648106224102493794, guid: dfb1aec6e78044346b46698907572ce4, type: 3}
