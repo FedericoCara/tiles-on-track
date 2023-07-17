@@ -12,7 +12,6 @@ public class Tile : MonoBehaviour {
     [SerializeField] private TileDisplayBase display;
     [SerializeField] private TileDirection comingTileDirection;
     [SerializeField] private TileDirection nextTileDirection;
-    [SerializeField] private bool hasEnemy = false;
     [SerializeField] private EnemyInTile enemyInTile;
     [SerializeField] private PotionInTile potionInTile;
 
@@ -29,7 +28,7 @@ public class Tile : MonoBehaviour {
     public Tile FollowingTile => followingTile;
     public TileDirection ComingTileDirection => comingTileDirection;
     public TileDirection NextTileDirection => nextTileDirection;
-    public bool HasEnemy => hasEnemy;
+    public bool HasEnemy => enemyInTile!=null;
     public TileDisplayBase Display => display;
     public EnemyInTile EnemyInTile => enemyInTile;
     public PotionInTile PotionInTile => potionInTile;
@@ -74,7 +73,7 @@ public class Tile : MonoBehaviour {
                 point = lineRenderer.transform.TransformPoint(lineRenderer.GetPosition(i)),
                 isLast = i == lineRenderer.positionCount - 1,
                 isFirst = i == 0,
-                stopsForEnemy = hasEnemy && i == enemyInTile.PlayerPointIndex,
+                stopsForEnemy = HasEnemy && i == enemyInTile.PlayerPointIndex,
                 stopsForPotion = HasPotion && i == potionInTile.PlayerPointIndex
             };
         }

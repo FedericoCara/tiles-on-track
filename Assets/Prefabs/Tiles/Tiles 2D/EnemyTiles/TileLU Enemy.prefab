@@ -97,6 +97,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1737615506023788419, guid: dacead7759b5d6742aebe05c933b4e66, type: 3}
+      propertyPath: enemyInTile
+      value: 
+      objectReference: {fileID: 6796008849660246403, guid: ac9e6d8201ab4a249ad675f8cbd1f81e, type: 3}
+    - target: {fileID: 1737615506023788419, guid: dacead7759b5d6742aebe05c933b4e66, type: 3}
       propertyPath: nextTileDirection
       value: 1
       objectReference: {fileID: 0}
@@ -250,8 +254,33 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3911798096097231685, guid: dacead7759b5d6742aebe05c933b4e66, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6849277724361426089}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5445402138314285711, guid: dacead7759b5d6742aebe05c933b4e66, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5026516506460514431}
   m_SourcePrefab: {fileID: 100100000, guid: dacead7759b5d6742aebe05c933b4e66, type: 3}
+--- !u!1 &3326016823667670997 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5445402138314285711, guid: dacead7759b5d6742aebe05c933b4e66, type: 3}
+  m_PrefabInstance: {fileID: 7330055658736131418}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5026516506460514431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3326016823667670997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f9b3787dfd441708c41cdd9cd109747, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPointIndex: 2
+  playerPointIndex: 1
+  enemyPrefab: {fileID: 0}
+  enemyDisplay:
+    mainSpriteRenderers: []
 --- !u!4 &6048590956136226335 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3911798096097231685, guid: dacead7759b5d6742aebe05c933b4e66, type: 3}

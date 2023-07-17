@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [Serializable]
-public class EnemyInTile {
+public class EnemyInTile : MonoBehaviour{
     [SerializeField] private int enemyPointIndex = -1;
     public int EnemyPointIndex => enemyPointIndex;
     [SerializeField] private int playerPointIndex = -1;
