@@ -11,7 +11,6 @@ public class DraggableTile :MonoBehaviour {
     public event Action OnTileDropped = () => {};
 
     [SerializeField] private Transform previewParent;
-    [SerializeField] private string previewSortLayerName = "Conveyor Belt";
     private Tile tilePrefab;
     private Draggable _draggable;
     private SnapToGrid _snapToGrid;
@@ -33,7 +32,7 @@ public class DraggableTile :MonoBehaviour {
 
     private void Start() {
         previewParent.DestroyAllChildren();
-        tilePrefab.Display.MakeDraggablePreview(previewParent, previewSortLayerName);
+        tilePrefab.Display.MakeDraggablePreview(previewParent);
     }
 
     public void SetTilePrefab(Tile tile) => tilePrefab = tile;

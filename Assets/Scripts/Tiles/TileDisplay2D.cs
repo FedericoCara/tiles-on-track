@@ -8,7 +8,8 @@ public class TileDisplay2D : TileDisplayBase {
     [SerializeField] private List<SpriteRenderer> mainSpriteRenderers;
     [SerializeField] private List<SpriteRenderer> backgroundSpriteRenderers;
     [SerializeField] private Tile tile;
-    
+    [SerializeField] private string previewSortLayer = "Conveyor Belt";
+
     public override GameObject MakeCorrectTilePreview() {
         var preview = GameObject.Instantiate(tile);
         preview.Display.MakeCorrectPreview();
@@ -23,15 +24,16 @@ public class TileDisplay2D : TileDisplayBase {
         return preview.gameObject;
     }
 
-    public override void MakeDraggablePreview(Transform previewParent, string sortLayerName) {
+    public override void MakeDraggablePreview(Transform previewParent) {
         var previewTileComponent = GameObject.Instantiate(tile, previewParent);
-        previewTileComponent.Display.DestroyBackgroundSprites();
-        previewTileComponent.Display.ChangeSortLayer(sortLayerName);
+        var display2D = previewTileComponent.Display as TileDisplay2D;
+        display2D.DestroyBackgroundSprites();
+        display2D.ChangeSortLayer(previewSortLayer);
         if (previewTileComponent.HasEnemy) {
             SpawnEnemyPreviewIfNecessary(previewTileComponent);
-            previewTileComponent.EnemyInTile.EnemyDisplay.ChangeSortLayer(sortLayerName);
+            previewTileComponent.EnemyInTile.EnemyDisplay.ChangeSortLayer(previewSortLayer);
         }else if (previewTileComponent.HasPotion) {
-            previewTileComponent.PotionInTile.ChangeSortLayer(sortLayerName);
+            previewTileComponent.PotionInTile.ChangeSortLayer(previewSortLayer);
             GameObject.Destroy(previewTileComponent.PotionInTile.Potion);
         }
 
@@ -75,7 +77,7 @@ public class TileDisplay2D : TileDisplayBase {
         backgroundSpriteRenderers.Clear();
     }
 
-    public override void ChangeSortLayer(string sortLayerName) {
+    public void ChangeSortLayer(string sortLayerName) {
         foreach (var spriteRenderer in mainSpriteRenderers) {
             spriteRenderer.sortingLayerName = sortLayerName;
         }
