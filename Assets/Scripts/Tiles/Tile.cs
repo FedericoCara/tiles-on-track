@@ -80,6 +80,8 @@ public class Tile : MonoBehaviour {
         }
     }
 
+    public Vector2 GetNextPointPosition(int enemyPointIndex) => Points[enemyPointIndex].point;
+
     public TilePoint GetNextPoint(int currentIndex) {
         if (currentIndex + 1 >= lineRenderer.positionCount)
             return null;

@@ -42,7 +42,9 @@ public class TileDisplay {
 
     private void SpawnEnemyPreviewIfNecessary(Tile previewTileComponent) {
         if (previewTileComponent.HasEnemy) {
-            var enemyPreviewComponent = previewTileComponent.SpawnEnemy();
+            var enemyInTile = previewTileComponent.EnemyInTile;
+            var enemyPosition = previewTileComponent.GetNextPointPosition(enemyInTile.EnemyPointIndex);
+            var enemyPreviewComponent =  enemyInTile.EnemyDisplay.SpawnEnemyPreview(enemyInTile.EnemyPrefab, enemyPosition, previewTileComponent.transform);
             GameObject.Destroy(enemyPreviewComponent);
         }
     }

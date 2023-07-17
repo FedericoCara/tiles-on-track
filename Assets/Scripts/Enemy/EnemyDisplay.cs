@@ -15,4 +15,12 @@ public class EnemyDisplay {
     public void SetEnemy(Enemy enemy) {
         mainSpriteRenderers.AddRange(enemy.GetComponentsInChildren<SpriteRenderer>());
     }
+
+    public Enemy SpawnEnemyPreview(Enemy enemyPrefab, Vector2 enemyPosition,  Transform parent) {
+        var _enemy = Enemy.Instantiate(enemyPrefab, parent);
+        _enemy.transform.position = enemyPosition;
+        SetEnemy(_enemy);
+        _enemy.EnemyFightDisplay.Hide();
+        return _enemy;
+    }
 }
