@@ -243,6 +243,7 @@ GameObject:
   - component: {fileID: 3911798096097231685}
   - component: {fileID: 1737615506023788419}
   - component: {fileID: 780663236079639877}
+  - component: {fileID: 7899410222411541771}
   m_Layer: 0
   m_Name: Tile Base
   m_TagString: Untagged
@@ -281,12 +282,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lineRenderer: {fileID: 8644445607679120058}
   followingTile: {fileID: 0}
-  display:
-    mainSpriteRenderers: []
-    backgroundSpriteRenderers:
-    - {fileID: 7769743681628110966}
-    - {fileID: 1405580127328415470}
-    tile: {fileID: 1737615506023788419}
+  display: {fileID: 7899410222411541771}
   comingTileDirection: 0
   nextTileDirection: 0
   hasEnemy: 0
@@ -344,6 +340,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 6.4, y: 6.4}
   m_EdgeRadius: 0
+--- !u!114 &7899410222411541771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5445402138314285711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e20d35f832e54fb196f94758ebc8b8f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainSpriteRenderers: []
+  backgroundSpriteRenderers:
+  - {fileID: 7769743681628110966}
+  - {fileID: 1405580127328415470}
+  tile: {fileID: 1737615506023788419}
 --- !u!1 &7627326346389660432
 GameObject:
   m_ObjectHideFlags: 0

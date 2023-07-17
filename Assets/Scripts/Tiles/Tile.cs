@@ -9,7 +9,7 @@ public class Tile : MonoBehaviour {
 
     [SerializeField] private LineRenderer lineRenderer;
     [SerializeField] private Tile followingTile;
-    [SerializeField] private TileDisplay display;
+    [SerializeField] private TileDisplayBase display;
     [SerializeField] private TileDirection comingTileDirection;
     [SerializeField] private TileDirection nextTileDirection;
     [SerializeField] private bool hasEnemy = false;
@@ -30,7 +30,7 @@ public class Tile : MonoBehaviour {
     public TileDirection ComingTileDirection => comingTileDirection;
     public TileDirection NextTileDirection => nextTileDirection;
     public bool HasEnemy => hasEnemy;
-    public TileDisplay Display => display;
+    public TileDisplayBase Display => display;
     public EnemyInTile EnemyInTile => enemyInTile;
     public PotionInTile PotionInTile => potionInTile;
 

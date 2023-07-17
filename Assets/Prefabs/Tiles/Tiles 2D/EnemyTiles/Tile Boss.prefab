@@ -192,6 +192,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tile Boss
       objectReference: {fileID: 0}
+    - target: {fileID: 7899410222411541771, guid: dacead7759b5d6742aebe05c933b4e66, type: 3}
+      propertyPath: mainSpriteRenderers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7899410222411541771, guid: dacead7759b5d6742aebe05c933b4e66, type: 3}
+      propertyPath: mainSpriteRenderers.Array.data[0]
+      value: 
+      objectReference: {fileID: 329144134042629944}
     - target: {fileID: 8644445607679120058, guid: dacead7759b5d6742aebe05c933b4e66, type: 3}
       propertyPath: m_Positions.Array.size
       value: 4

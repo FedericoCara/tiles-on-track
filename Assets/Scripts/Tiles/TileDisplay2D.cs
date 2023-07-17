@@ -4,26 +4,26 @@ using Mimic;
 using UnityEngine;
 
 [Serializable]
-public class TileDisplay {
+public class TileDisplay2D : TileDisplayBase {
     [SerializeField] private List<SpriteRenderer> mainSpriteRenderers;
     [SerializeField] private List<SpriteRenderer> backgroundSpriteRenderers;
     [SerializeField] private Tile tile;
     
-    public GameObject MakeCorrectTilePreview() {
+    public override GameObject MakeCorrectTilePreview() {
         var preview = GameObject.Instantiate(tile);
         preview.Display.MakeCorrectPreview();
         SpawnEnemyPreviewIfNecessary(preview);
         return preview.gameObject;
     }
 
-    public GameObject MakeWrongTilePreview() {
+    public override GameObject MakeWrongTilePreview() {
         var preview = GameObject.Instantiate(tile);
         preview.Display.MakeWrongPreview();
         SpawnEnemyPreviewIfNecessary(preview);
         return preview.gameObject;
     }
 
-    public void MakeDraggablePreview(Transform previewParent, string sortLayerName) {
+    public override void MakeDraggablePreview(Transform previewParent, string sortLayerName) {
         var previewTileComponent = GameObject.Instantiate(tile, previewParent);
         previewTileComponent.Display.DestroyBackgroundSprites();
         previewTileComponent.Display.ChangeSortLayer(sortLayerName);
@@ -49,7 +49,7 @@ public class TileDisplay {
         }
     }
     
-    public void MakeCorrectPreview() {
+    public override void MakeCorrectPreview() {
         foreach (var spriteRenderer in mainSpriteRenderers) {
             spriteRenderer.color = spriteRenderer.color.GetColorWithAlpha(0.5f);
         }
@@ -58,7 +58,7 @@ public class TileDisplay {
         }
     }
 
-    public void MakeWrongPreview() {
+    public override void MakeWrongPreview() {
         foreach (var spriteRenderer in mainSpriteRenderers) {
             spriteRenderer.color = spriteRenderer.color.GetColorWithAlpha(0.5f) + Color.red*0.4f;
         }
@@ -67,7 +67,7 @@ public class TileDisplay {
         }
     }
 
-    public void DestroyBackgroundSprites() {
+    public override void DestroyBackgroundSprites() {
         foreach (var spriteRenderer in backgroundSpriteRenderers) {
             if (spriteRenderer != null && spriteRenderer.gameObject != null)
                 GameObject.Destroy(spriteRenderer.gameObject);
@@ -75,7 +75,7 @@ public class TileDisplay {
         backgroundSpriteRenderers.Clear();
     }
 
-    public void ChangeSortLayer(string sortLayerName) {
+    public override void ChangeSortLayer(string sortLayerName) {
         foreach (var spriteRenderer in mainSpriteRenderers) {
             spriteRenderer.sortingLayerName = sortLayerName;
         }
