@@ -35,6 +35,10 @@ public class ConveyorTileStrategy : MonoBehaviour {
         return GiveNeutralTile();
     }
 
+    public void OnBeltBombed() {
+        finalBossDelivered = false;
+    }
+
     private TileSpawnData GiveNeutralTile() => new TileSpawnData(_tilesToGive.RemoveElementAtRandom());
 
     private TileSpawnData ShouldGivePotion(float healthPercentage) {

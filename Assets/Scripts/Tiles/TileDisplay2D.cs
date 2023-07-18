@@ -7,26 +7,7 @@ using UnityEngine;
 public class TileDisplay2D : TileDisplayBase {
     [SerializeField] private List<SpriteRenderer> mainSpriteRenderers;
     [SerializeField] private List<SpriteRenderer> backgroundSpriteRenderers;
-    [SerializeField] private string previewSortLayer = "Conveyor Belt";
-
-    public override void MakeDraggablePreview(Transform previewParent, Enemy enemyPrefab) {
-        var previewTileComponent = GameObject.Instantiate(tile, previewParent);
-        var display2D = previewTileComponent.Display as TileDisplay2D;
-        display2D.DestroyBackgroundSprites();
-        display2D.ChangeSortLayer(previewSortLayer);
-        if (previewTileComponent.HasEnemy) {
-            SpawnEnemyPreviewIfNecessary(previewTileComponent, enemyPrefab);
-            var enemyDisplay2D = previewTileComponent.EnemyInTile.EnemyDisplay as EnemyDisplay2D;
-            enemyDisplay2D.ChangeSortLayer(previewSortLayer);
-        }else if (previewTileComponent.HasPotion) {
-            previewTileComponent.PotionInTile.ChangeSortLayer(previewSortLayer);
-            Destroy(previewTileComponent.PotionInTile.Potion);
-        }
-
-        Destroy(previewTileComponent);
-        Destroy(previewTileComponent.GetComponentInChildren<Collider2D>());
-    }
-
+    private const string previewSortLayer = "Conveyor Belt";
 
     public override void MakeCorrectPreview() {
         foreach (var spriteRenderer in mainSpriteRenderers) {
@@ -55,11 +36,16 @@ public class TileDisplay2D : TileDisplayBase {
         }
     }
 
-    private void DestroyBackgroundSprites() {
+    public void DestroyBackgroundSprites() {
         foreach (var spriteRenderer in backgroundSpriteRenderers) {
             if (spriteRenderer != null && spriteRenderer.gameObject != null)
                 Destroy(spriteRenderer.gameObject);
         }
         backgroundSpriteRenderers.Clear();
+    }
+
+    internal override void SetAsDraggablePreview() {
+        DestroyBackgroundSprites();
+        ChangeSortLayer(previewSortLayer);
     }
 }

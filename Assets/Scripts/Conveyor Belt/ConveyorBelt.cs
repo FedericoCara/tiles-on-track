@@ -88,4 +88,13 @@ public class ConveyorBelt : MonoBehaviour {
         Destroy(_draggablePositions[indexOfDraggable].gameObject);
         _draggablePositions.RemoveAt(indexOfDraggable);
     }
+
+    public void Clear() {
+        foreach (var spawnedDraggable in _spawnedDraggables) {
+            Destroy(spawnedDraggable.gameObject);
+        }
+        _spawnedDraggables.Clear();
+        _draggablePositions.Clear();
+        strategy.OnBeltBombed();
+    }
 }

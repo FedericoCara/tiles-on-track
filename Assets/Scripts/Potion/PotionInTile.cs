@@ -9,10 +9,16 @@ public class PotionInTile : MonoBehaviour {
     
     [SerializeField] private Potion potion;
     public Potion Potion => potion;
+    private const string previewSortLayer = "Conveyor Belt";
 
-    public void ChangeSortLayer(string sortLayerName) {
+    public void ChangeSortLayer() {
         foreach (var spriteRenderer in Potion.GetComponentsInChildren<SpriteRenderer>()) {
-            spriteRenderer.sortingLayerName = sortLayerName;
+            spriteRenderer.sortingLayerName = previewSortLayer;
         }
+    }
+
+    public void SetAsDraggablePreview() {
+        ChangeSortLayer();
+        Destroy(Potion);
     }
 }

@@ -3,8 +3,22 @@
 public abstract class TileDisplayBase : MonoBehaviour {
     
     [SerializeField] protected Tile tile;
-    
-    public abstract void MakeDraggablePreview(Transform previewParent, Enemy enemyPrefab);
+
+    public void MakeDraggablePreview(Transform previewParent, Enemy enemyPrefab) {
+        var previewTileComponent = Instantiate(tile, previewParent);
+        previewTileComponent.Display.SetAsDraggablePreview();
+        if (previewTileComponent.HasEnemy) {
+            SpawnEnemyPreviewIfNecessary(previewTileComponent, enemyPrefab);
+            previewTileComponent.EnemyInTile.EnemyDisplay.SetAsDraggablePreview();
+        }else if (previewTileComponent.HasPotion) {
+            previewTileComponent.PotionInTile.SetAsDraggablePreview();
+        }
+
+        Destroy(previewTileComponent);
+        Destroy(previewTileComponent.GetComponentInChildren<Collider2D>());
+        
+    }
+
     public abstract void MakeCorrectPreview();
     public abstract void MakeWrongPreview();
 
@@ -23,7 +37,7 @@ public abstract class TileDisplayBase : MonoBehaviour {
         return preview.gameObject;
     }
 
-    protected void SpawnEnemyPreviewIfNecessary(Tile previewTileComponent, Enemy enemyPrefab) {
+    private void SpawnEnemyPreviewIfNecessary(Tile previewTileComponent, Enemy enemyPrefab) {
         if (previewTileComponent.HasEnemy) {
             var enemyInTile = previewTileComponent.EnemyInTile;
             enemyInTile.SetEnemy(enemyPrefab);
@@ -32,4 +46,6 @@ public abstract class TileDisplayBase : MonoBehaviour {
             Destroy(enemyPreviewComponent);
         }
     }
+
+    internal abstract void SetAsDraggablePreview();
 }

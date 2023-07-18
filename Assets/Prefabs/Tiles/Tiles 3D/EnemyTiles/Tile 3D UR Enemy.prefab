@@ -9,6 +9,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1737615506023788419, guid: 05b92889f51d8394a9963b6e63adbd12, type: 3}
+      propertyPath: enemyInTile
+      value: 
+      objectReference: {fileID: 19227972717488725}
+    - target: {fileID: 1737615506023788419, guid: 05b92889f51d8394a9963b6e63adbd12, type: 3}
       propertyPath: comingTileDirection
       value: 1
       objectReference: {fileID: 0}
@@ -58,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5445402138314285711, guid: 05b92889f51d8394a9963b6e63adbd12, type: 3}
       propertyPath: m_Name
-      value: Tile 3D UR
+      value: Tile 3D UR Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 7769743681628110966, guid: 05b92889f51d8394a9963b6e63adbd12, type: 3}
       propertyPath: m_RenderingLayerMask
@@ -90,13 +94,36 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3911798096097231685, guid: 05b92889f51d8394a9963b6e63adbd12, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8496482465088129346}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5445402138314285711, guid: 05b92889f51d8394a9963b6e63adbd12, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 19227972717488725}
   m_SourcePrefab: {fileID: 100100000, guid: 05b92889f51d8394a9963b6e63adbd12, type: 3}
 --- !u!4 &2309556436205825283 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3911798096097231685, guid: 05b92889f51d8394a9963b6e63adbd12, type: 3}
   m_PrefabInstance: {fileID: 1604494173206949446}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6761515576613342409 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5445402138314285711, guid: 05b92889f51d8394a9963b6e63adbd12, type: 3}
+  m_PrefabInstance: {fileID: 1604494173206949446}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &19227972717488725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6761515576613342409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f9b3787dfd441708c41cdd9cd109747, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPointIndex: 2
+  playerPointIndex: 1
+  enemyPrefab: {fileID: 0}
 --- !u!1001 &5799944557016622979
 PrefabInstance:
   m_ObjectHideFlags: 0
