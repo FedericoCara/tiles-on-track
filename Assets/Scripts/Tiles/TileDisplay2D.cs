@@ -7,22 +7,7 @@ using UnityEngine;
 public class TileDisplay2D : TileDisplayBase {
     [SerializeField] private List<SpriteRenderer> mainSpriteRenderers;
     [SerializeField] private List<SpriteRenderer> backgroundSpriteRenderers;
-    [SerializeField] private Tile tile;
     [SerializeField] private string previewSortLayer = "Conveyor Belt";
-
-    public override GameObject MakeCorrectTilePreview(Enemy enemyPrefab) {
-        var preview = GameObject.Instantiate(tile);
-        preview.Display.MakeCorrectPreview();
-        SpawnEnemyPreviewIfNecessary(preview, enemyPrefab);
-        return preview.gameObject;
-    }
-
-    public override GameObject MakeWrongTilePreview(Enemy enemyPrefab) {
-        var preview = GameObject.Instantiate(tile);
-        preview.Display.MakeWrongPreview();
-        SpawnEnemyPreviewIfNecessary(preview, enemyPrefab);
-        return preview.gameObject;
-    }
 
     public override void MakeDraggablePreview(Transform previewParent, Enemy enemyPrefab) {
         var previewTileComponent = GameObject.Instantiate(tile, previewParent);
@@ -67,16 +52,6 @@ public class TileDisplay2D : TileDisplayBase {
         }
         foreach (var spriteRenderer in backgroundSpriteRenderers) {
             spriteRenderer.sortingLayerName = sortLayerName;
-        }
-    }
-
-    private void SpawnEnemyPreviewIfNecessary(Tile previewTileComponent, Enemy enemyPrefab) {
-        if (previewTileComponent.HasEnemy) {
-            var enemyInTile = previewTileComponent.EnemyInTile;
-            enemyInTile.SetEnemy(enemyPrefab);
-            var enemyPosition = previewTileComponent.GetNextPointPosition(enemyInTile.EnemyPointIndex);
-            var enemyPreviewComponent =  enemyInTile.EnemyDisplay.SpawnEnemyPreview(enemyPrefab, enemyPosition, previewTileComponent.transform);
-            Destroy(enemyPreviewComponent);
         }
     }
 
