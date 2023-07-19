@@ -9,10 +9,12 @@ public class LostPanel : MonoBehaviour {
     [SerializeField] private GameObject panel;
     
     private void Awake() {
-        player.OnPlayerDied += HandleDead;
+        player.OnPlayerFinishedDying += HandleDead;
     }
 
     private void HandleDead() {
+        if(player.KilledByBoss)
+            return;
         mask.SetActive(true);
         panel.SetActive(true);
     }

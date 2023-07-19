@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour {
     private bool endReached = false;
     private bool fighting = false;
     private bool drinking = false;
-    public Action<Enemy> OnFightStarted = enemy => { };
+    public Action<Enemy, bool> OnFightStarted = (enemy, isTraversingInReverse) => { };
     public Action<Potion> OnDrinkingStarted = potion => { };
 
     private void Start() {
@@ -80,7 +80,7 @@ public class PlayerMovement : MonoBehaviour {
 
     private void StartFight() {
         fighting = true;
-        OnFightStarted(currentTile.Enemy);
+        OnFightStarted(currentTile.Enemy, isTraversingInReverse);
     }
 
     private void DrinkPotion() {
@@ -125,6 +125,7 @@ public class PlayerMovement : MonoBehaviour {
 
     public void SetFightFinished() {
         fighting = false;
+        TurnToPoint();
         SetNextPoint();
     }
 
@@ -132,4 +133,9 @@ public class PlayerMovement : MonoBehaviour {
         drinking = false;
         SetNextPoint();
     }
+
+    public void Turn180() {
+        transform.right = -transform.right;
+    }
+    
 }

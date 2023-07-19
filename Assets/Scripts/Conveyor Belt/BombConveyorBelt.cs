@@ -21,7 +21,7 @@ public class BombConveyorBelt : MonoBehaviour {
     }
 
     public void Bomb() {
-        player.ReceiveDamage(player.MaxHealth / 2);
+        player.ReceiveDamage(player.MaxHealth / 2, null);
         conveyorBelt.Clear();
     }
 }

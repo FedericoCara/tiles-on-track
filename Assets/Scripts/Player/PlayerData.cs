@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerData : IPlayerEvents{
     public event Action<ExperienceGained> OnExperienceGained = experienceGained => { };
     public event Action<int> OnLevelGained = newLevel => { };
-    public event Action OnPlayerDied = () => { };
+    public event Action<Enemy> OnPlayerDied = (Enemy source) => { };
     public event Action<int, int> OnPlayerHealthChanged = (health, maxHealth) => { };
     
     [SerializeField] private int experience;
@@ -37,11 +37,11 @@ public class PlayerData : IPlayerEvents{
         UpdateLevelIfNecessary();
     }
 
-    public void ReceiveDamage(int damage) {
+    public void ReceiveDamage(int damage, Enemy source) {
         ValidateMaxHealth();
         health -= damage;
         if (health <= 0) {
-            OnPlayerDied();
+            OnPlayerDied(source);
         }else
             NotifyHealthUpdated();
     }

@@ -2898,6 +2898,10 @@ PrefabInstance:
       value: LostAtBossPanel
       objectReference: {fileID: 0}
     - target: {fileID: 6043055411906327441, guid: be17ef94a2d01304698b6af640767573, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 825024581160370927}
+    - target: {fileID: 6043055411906327441, guid: be17ef94a2d01304698b6af640767573, type: 3}
       propertyPath: fightManager
       value: 
       objectReference: {fileID: 825024581160370929}

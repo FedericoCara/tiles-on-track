@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerFightManager : MonoBehaviour {
 
     public event Action OnBossDefeated = () => { };
-    public event Action OnPlayerDefeated = () => { };
+    public event Action OnPlayerStartAttack = () => { };
 
     private PlayerAttack _playerAttack;
     private Player _player;
@@ -16,6 +16,10 @@ public class PlayerFightManager : MonoBehaviour {
     private Enemy _opponent;
     private float _playerPreparingAttack = 0;
     private float _opponentPreparingAttack = 0;
+    private bool startingAttack = false;
+    private bool _isTraversingInReverse;
+
+    public float PlayerStartAttackAnticipation { get; set; }
 
     private void Awake() {
         _playerMovement = GetComponent<PlayerMovement>();
@@ -29,7 +33,14 @@ public class PlayerFightManager : MonoBehaviour {
             _playerPreparingAttack += Time.deltaTime;
             _opponentPreparingAttack += Time.deltaTime;
 
+            if (!startingAttack &&
+                _playerPreparingAttack >= _playerAttack.FrequencySeconds - PlayerStartAttackAnticipation) {
+                OnPlayerStartAttack();
+                startingAttack = true;
+            }
+
             if (_playerPreparingAttack >= _playerAttack.FrequencySeconds) {
+                startingAttack = false;
                 _opponent.ReceiveDamage(_playerAttack.Damage);
                 _playerPreparingAttack -= _playerAttack.FrequencySeconds;
                 if (_opponent.IsDead) {
@@ -46,12 +57,10 @@ public class PlayerFightManager : MonoBehaviour {
             }
 
             if (_opponentPreparingAttack >= _opponent.FrequencySeconds) {
-                _player.ReceiveDamage(_opponent.Damage);
+                _player.ReceiveDamage(_opponent.Damage, _opponent);
                 _opponentPreparingAttack -= _opponent.FrequencySeconds;
                 if (_player.IsDead) {
                     _fighting = false;
-                    Destroy(_player.gameObject);
-                    OnPlayerDefeated();
                     return;
                 }
             }
@@ -61,11 +70,15 @@ public class PlayerFightManager : MonoBehaviour {
         }
     }
 
-    private void StartFight(Enemy enemy) {
+    private void StartFight(Enemy enemy, bool isTraversingInReverse) {
+        _isTraversingInReverse = isTraversingInReverse;
         _fighting = true;
         _opponent = enemy;
         _playerPreparingAttack = 0;
         _opponentPreparingAttack = 0;
         _opponent.EnemyFightDisplay.Show();
+        if (_isTraversingInReverse) {
+            _playerMovement.Turn180();
+        }
     }
 }
